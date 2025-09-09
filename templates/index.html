@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srinivas Kumar - Data Scientist & Python Developer</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio of Srinivas Kumar, a passionate MCA student specializing in Python, Data Science, and Machine Learning. View my projects, skills, and experience.">
+    <meta name="keywords" content="Srinivas Kumar, Portfolio, Data Scientist, Python Developer, MCA, Machine Learning, Data Analysis">
+    <meta name="author" content="Srinivas Kumar">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Srinivas Kumar - Portfolio">
+    <meta property="og:description" content="Explore the projects and skills of Srinivas Kumar, a Data Scientist and Python Developer.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/profile.jpg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="Srinivas Kumar - Portfolio">
+    <meta property="twitter:description" content="Explore the projects and skills of Srinivas Kumar, a Data Scientist and Python Developer.">
+    <meta property="twitter:image" content="{{ url_for('static', filename='images/profile.jpg') }}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color-light: #18181b;
+            --text-color-dark: #e0e0e0;
+            --glass-bg-light: rgba(255, 255, 255, 0.5);
+            --glass-border-light: rgba(255, 255, 255, 0.8);
+            --glass-bg-dark: rgba(26, 26, 26, 0.3);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent;
+            color: var(--text-color-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, hsl(0, 0%, 10%) 0%, hsl(0, 0%, 4%) 100%);
+            transition: background 0.3s ease;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px); 
+        }
+        .shape1 { width: 400px; height: 400px; background: rgba(192, 132, 252, 0.4); top: -100px; left: -100px; animation: move1 20s infinite alternate; }
+        .shape2 { width: 500px; height: 500px; background: rgba(56, 189, 248, 0.4); bottom: -150px; right: -150px; animation: move2 25s infinite alternate; }
+        .shape3 { width: 300px; height: 300px; background: rgba(163, 230, 53, 0.3); bottom: 100px; left: 150px; animation: move3 18s infinite alternate; }
+
+        @keyframes move1 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(200px, 300px) rotate(360deg); } }
+        @keyframes move2 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-300px, -200px) rotate(-360deg); } }
+        @keyframes move3 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-200px, 200px) rotate(180deg); } }
+
+
+        /* Glassmorphism Styles */
+        .glass-ui {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border-dark);
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+        }
+
+        html.light .glass-ui {
+            background: var(--glass-bg-light);
+            border: 1px solid var(--glass-border-light);
+        }
+        
+        html.light body {
+             background-color: transparent;
+             color: var(--text-color-light);
+        }
+        html.light .background-container { 
+            background: radial-gradient(ellipse at center, hsl(220, 50%, 95%) 0%, hsl(240, 50%, 92%) 100%);
+        }
+        html.light .github-icon:hover { color: #18181b; }
+
+
+        .gradient-text {
+            background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #a3e635, #4ade80, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-animation 5s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(192, 132, 252, 0.8);
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; transform: translateX(-50%); background-image: linear-gradient(90deg, #818cf8, #c084fc); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        
+        .glow-button { border: 1px solid transparent; background-clip: padding-box; }
+        .glow-button:hover:not(:disabled) { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); border-color: rgba(192, 132, 252, 0.8); transform: scale(1.05); }
+        .glow-button:disabled { cursor: not-allowed; opacity: 0.7; }
+
+        .social-icon { transition: transform 0.3s ease, color 0.3s ease; }
+        .social-icon:hover { transform: scale(1.2); }
+        .linkedin-icon:hover { color: #0A66C2; }
+        .github-icon:hover { color: #e0e0e0; }
+        .mail-icon:hover { color: #D44638; }
+        .whatsapp-icon:hover { color: #25D366; }
+
+        .adaptive-text { color: var(--text-color-dark); }
+        html.light .adaptive-text { color: var(--text-color-light); }
+
+        section { padding: 8rem 1rem; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Timeline */
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background-color: rgba(255, 255, 255, 0.1); top: 0; bottom: 0; left: 50%; margin-left: -3px; }
+        html.light .timeline::after { background-color: rgba(0, 0, 0, 0.1); }
+        .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        .timeline-container::after { content: ''; position: absolute; width: 25px; height: 25px; right: -13px; background-color: #818cf8; border: 4px solid #c084fc; top: 15px; border-radius: 50%; z-index: 1; }
+        .timeline-container.right::after { left: -12px; }
+        .timeline-content { padding: 20px 30px; position: relative; border-radius: 1.5rem; }
+        
+        .project-card { transition: all 0.3s ease-out; }
+        .project-card.hidden { transform: scale(0.8); opacity: 0; }
+        .filter-btn.active { background: linear-gradient(90deg, #818cf8, #c084fc); color: white; }
+        html.light .filter-btn.active { color: #18181b; }
+        
+        .modal-overlay, #lightbox-overlay, #curriculum-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+        .modal-overlay.active, #lightbox-overlay.active, #curriculum-modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-container { width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; transform: scale(0.95); transition: transform 0.3s ease; position: relative; }
+        .modal-overlay.active .modal-container, #curriculum-modal-overlay.active .modal-container { transform: scale(1); }
+        .modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; z-index: 10; }
+        #lightbox-img { max-height: 90vh; max-width: 90vw; transform: scale(0.95); transition: transform 0.3s ease; }
+        #lightbox-overlay.active #lightbox-img { transform: scale(1); }
+        
+        .semester-tab { cursor: pointer; transition: all 0.3s ease; }
+        .semester-tab.active { background-color: rgba(192, 132, 252, 0.3); border-color: rgba(192, 132, 252, 0.8); }
+
+
+        #chat-icon { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        #chat-widget { position: fixed; bottom: 7rem; right: 2rem; z-index: 998; width: 350px; max-width: 90vw; height: 500px;  box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; transform: scale(0.95) translateY(10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; border-radius: 1rem; }
+        #chat-widget.active { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+        .chat-message { padding: 0.75rem 1rem; border-radius: 1rem; margin-bottom: 0.5rem; max-width: 80%; line-height: 1.4; }
+        .user-message { background-color: #818cf8; color: white; align-self: flex-end; border-bottom-right-radius: 0.25rem; }
+        .model-message { background-color: rgba(255,255,255,0.2); align-self: flex-start; border-bottom-left-radius: 0.25rem; }
+        html.light .model-message { background-color: rgba(0,0,0,0.1); }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-container { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-container.right { left: 0%; }
+            .timeline-container.left::after, .timeline-container.right::after { left: 18px; }
+            section { padding: 4rem 1rem; }
+            h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
+            #chat-widget { bottom: 6rem; right: 1rem; width: calc(100vw - 2rem); }
+            #chat-icon { bottom: 1rem; right: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center glass-ui rounded-2xl" id="navbar">
+             <a href="#" class="text-2xl font-bold gradient-text">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="SK" class="w-10 h-10 rounded-full object-cover border-2 border-purple-400">
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#about" class="nav-link text-md adaptive-text">About</a>
+                    <a href="#journey" class="nav-link text-md adaptive-text">Journey</a>
+                    <a href="#skills" class="nav-link text-md adaptive-text">Skills</a>
+                    <a href="#projects" class="nav-link text-md adaptive-text">Projects</a>
+                    <a href="#certifications" class="nav-link text-md adaptive-text">Certifications</a>
+                    <a href="#contact" class="nav-link text-md adaptive-text">Contact</a>
+                    <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="ml-4 px-5 py-2 rounded-full border-2 border-purple-400 text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition">Resume</a>
+                </nav>
+                <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center glass-ui focus:outline-none">
+                    <svg id="theme-icon-light" class="w-6 h-6 adaptive-text hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="theme-icon-dark" class="w-6 h-6 adaptive-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center glass-ui rounded-full">
+                    <svg class="w-6 h-6 adaptive-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden mt-2 glass-ui rounded-2xl mx-4">
+             <a href="#about" class="block text-center py-3 text-lg nav-link adaptive-text">About</a>
+             <a href="#journey" class="block text-center py-3 text-lg nav-link adaptive-text">Journey</a>
+             <a href="#skills" class="block text-center py-3 text-lg nav-link adaptive-text">Skills</a>
+             <a href="#projects" class="block text-center py-3 text-lg nav-link adaptive-text">Projects</a>
+             <a href="#certifications" class="block text-center py-3 text-lg nav-link adaptive-text">Certifications</a>
+             <a href="#contact" class="block text-center py-3 text-lg nav-link adaptive-text">Contact</a>
+             <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="block text-center py-3 text-lg text-purple-400 font-semibold">Download Resume</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="min-h-screen flex items-center justify-center text-center -mt-16 reveal">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl md:text-7xl font-extrabold mb-4 leading-tight">
+                    Hi, I'm <span class="gradient-text">Srinivas Kumar</span>
+                </h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto">
+                    A passionate MCA student from Nellore, specializing in Python and Data Science. Welcome to my creative space.
+                </p>
+                <div class="mt-12">
+                     <a href="#projects" class="inline-block px-8 py-4 rounded-full font-bold text-lg glow-button glass-ui adaptive-text">View My Work</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12 mt-12">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl shadow-purple-500/20 flex-shrink-0">
+                        <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Srinivas Kumar" class="w-full h-full object-cover">
+                    </div>
+                    <div class="max-w-2xl text-left">
+                        <p class="text-lg mb-4">
+                            I am currently pursuing my Master of Computer Applications (MCA), 2nd year, at Narayana Engineering College, Nellore. I have a strong passion for technology and problem-solving, which has driven me to build a solid foundation in software development and data analysis.
+                        </p>
+                        <p class="text-lg">
+                            My primary expertise lies in Python and its powerful libraries like NumPy and Pandas for data manipulation, and Matplotlib for visualization. I'm also proficient in SQL for database management. I'm always eager to learn new technologies and apply my skills to create meaningful and innovative projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-16">My <span class="gradient-text">Journey</span></h2>
+                <div class="timeline">
+                    <!-- PG -->
+                    <div class="timeline-container left reveal">
+                        <div class="timeline-content glass-ui glass-card">
+                             <a href="https://www.necn.ac.in/" target="_blank" class="block">
+                                <img src="{{ url_for('static', filename='images/pg_logo.jpg') }}" alt="Narayana Engineering College Logo" class="mx-auto mb-4 h-16 w-16 object-contain rounded-full">
+                                <h3 class="text-xl font-bold mb-1 adaptive-text">Master of Computer Applications</h3>
+                                <p class="font-semibold adaptive-text">Narayana Engineering College</p>
+                                <p class="text-sm opacity-80">Nellore</p>
+                                <p class="text-sm mt-2 opacity-60">(Pursuing 2nd Year)</p>
+                            </a>
+                            <button data-curriculum="pg" class="view-curriculum-btn mt-4 glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
+                        </div>
+                    </div>
+                    <!-- Training -->
+                    <div class="timeline-container right reveal">
+                         <a href="{{ url_for('static', filename='images/certs/data_science_master_cert.png') }}" class="block cert-link">
+                            <div class="timeline-content glass-ui glass-card">
+                                <img src="{{ url_for('static', filename='images/besant_logo.png') }}" alt="Besant Technologies Logo" class="mx-auto mb-4 h-16 w-16 object-contain rounded-full">
+                                <h3 class="text-xl font-bold mb-1 adaptive-text">Data Science Master Program</h3>
+                                <p class="font-semibold adaptive-text">Besant Technologies</p>
+                                <p class="text-sm opacity-80">Anna Nagar, Chennai</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- UG -->
+                    <div class="timeline-container left reveal">
+                        <div class="timeline-content glass-ui glass-card">
+                            <a href="https://kcdcnellore.com/" target="_blank" class="block">
+                                <img src="{{ url_for('static', filename='images/ug_logo.jpg') }}" alt="Krishna Chaitanya Degree College Logo" class="mx-auto mb-4 h-16 w-16 object-contain rounded-full">
+                                <h3 class="text-xl font-bold mb-1 adaptive-text">Advanced BCA</h3>
+                                <p class="font-semibold adaptive-text">Krishna Chaitanya Degree College</p>
+                                <p class="text-sm opacity-80">Vikrama Simhapuri University, Nellore</p>
+                            </a>
+                            <button data-curriculum="ug" class="view-curriculum-btn mt-4 glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
+                        </div>
+                    </div>
+                    <!-- Intermediate -->
+                    <div class="timeline-container right reveal">
+                         <a href="https://share.google/qyjqaoAjBKSNtwt4M" target="_blank" class="block">
+                            <div class="timeline-content glass-ui glass-card">
+                                <img src="{{ url_for('static', filename='images/intermediate_logo.jpg') }}" alt="Sri Chaitanya Junior College Logo" class="mx-auto mb-4 h-16 w-16 object-contain rounded-full">
+                                <h3 class="text-xl font-bold mb-1 adaptive-text">Intermediate (MPC)</h3>
+                                <p class="font-semibold adaptive-text">Sri Chaitanya Junior College</p>
+                                <p class="text-sm opacity-80">Ramalingapuram, Nellore</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12">My <span class="gradient-text">Skills</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/python.svg') }}" alt="Python Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Python</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/sql.svg') }}" alt="SQL Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">SQL</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/numpy.svg') }}" alt="NumPy Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">NumPy</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/pandas.svg') }}" alt="Pandas Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Pandas</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/matplotlib.svg') }}" alt="Matplotlib Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Matplotlib</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/scikit_learn.svg') }}" alt="Scikit-learn Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Scikit-learn</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/machine_learning.svg') }}" alt="Machine Learning Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Machine Learning</h3>
+                    </div>
+                     <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/power_bi.svg') }}" alt="Power BI Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Power BI</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/jupyter.svg') }}" alt="Jupyter Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Jupyter</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/google_colab.svg') }}" alt="Google Colab Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Google Colab</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/excel.svg') }}" alt="Excel Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Excel</h3>
+                    </div>
+                     <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/google_analytics.svg') }}" alt="Google Analytics Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Google Analytics</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/google_data_studio.svg') }}" alt="Google Data Studio Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Google Data Studio</h3>
+                    </div>
+                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/web_scrapping.svg') }}" alt="Web scrapping Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Web Scrapping</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8">My <span class="gradient-text">Projects</span></h2>
+                <div id="filters" class="flex justify-center flex-wrap gap-4 mb-12">
+                    <button class="filter-btn active glow-button glass-ui adaptive-text px-5 py-2 rounded-full" data-filter="all">All</button>
+                    <button class="filter-btn glow-button glass-ui adaptive-text px-5 py-2 rounded-full" data-filter="web-app">Web Apps</button>
+                    <button class="filter-btn glow-button glass-ui adaptive-text px-5 py-2 rounded-full" data-filter="data-science">Data Science</button>
+                </div>
+                <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project cards will be generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12">Certifications &amp; Achievements</h2>
+
+                <h3 class="text-3xl font-bold mb-8 gradient-text">Coding & Technical</h3>
+                <div id="coding-certs-grid" class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-16">
+                    <!-- JS will populate this -->
+                </div>
+
+                <h3 class="text-3xl font-bold mb-8 gradient-text">Academic & School-Level</h3>
+                <div id="academic-certs-grid" class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                     <!-- JS will populate this -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contact <span class="gradient-text">Me</span></h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">I'm available for freelance work and open to new opportunities. Let's build something amazing together.</p>
+                <form id="contact-form" class="max-w-xl mx-auto space-y-6">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <textarea id="message" name="message" rows="5" placeholder="Your Message" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
+                    <button type="submit" id="submit-contact-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Send Message</button>
+                </form>
+                <div id="form-status" class="mt-6 text-lg"></div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="py-8 reveal">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                 <a href="https://www.linkedin.com/in/srinivas-kumar-95316116b/" target="_blank" class="social-icon linkedin-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                 <a href="https://github.com/srinivasrio" target="_blank" class="social-icon github-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.577.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"/></svg></a>
+                 <a href="mailto:srinivasrio06@gmail.com" class="social-icon mail-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M2.003 5.884L10 11.882l7.997-5.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 6-8-6V18a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg></a>
+                 <a href="https://wa.me/8247005501" target="_blank" class="social-icon whatsapp-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.11 4.9C17.22 3 14.67 2 12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.32 4.95L2 22l5.05-1.32c1.5.86 3.17 1.32 4.95 1.32h.01c5.52 0 10-4.48 10-10c0-2.67-1-5.22-2.89-7.1zM12 20.37c-2.13 0-4.14-.59-5.89-1.66L4.89 19.3l.63-1.25c-1.06-1.75-1.71-3.76-1.71-5.94c0-4.6 3.73-8.33 8.33-8.33c2.25 0 4.35.88 5.89 2.42c1.54 1.54 2.42 3.64 2.42 5.89c0 4.6-3.73 8.33-8.33 8.33zM16.56 12.82c-.22-.11-1.3-.64-1.5-.72c-.2-.08-.34-.11-.49.11c-.15.22-.57.72-.69.86c-.13.15-.25.17-.47.06c-.22-.11-1-.37-1.89-1.18c-.7-.63-1.17-1.41-1.3-1.66c-.12-.25-.01-.39.1-.5c.1-.11.23-.29.34-.43c.12-.15.16-.25.24-.42c.08-.17.04-.31-.02-.43c-.06-.12-.49-1.18-.67-1.62c-.18-.43-.37-.37-.51-.37c-.13 0-.28 0-.42 0c-.15 0-.39.06-.59.3c-.2.25-.77.75-.77 1.82c0 1.06.79 2.11.9 2.27c.11.16 1.56 2.51 3.78 3.35c.55.21 1 .33 1.35.42c.5.12.95.1.13.06c.4-.04 1.3-.53 1.48-1.05c.19-.52.19-1 .13-1.11c-.06-.11-.2-.17-.41-.28z"/></svg></a>
+            </div>
+            <p>&copy; 2025 Srinivas Kumar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-container glass-ui rounded-2xl p-6">
+            <button class="modal-close-btn adaptive-text">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+    <div id="lightbox-overlay" class="cursor-pointer">
+        <img id="lightbox-img" src="" alt="Certificate full view">
+    </div>
+    <div id="curriculum-modal-overlay" class="modal-overlay">
+        <div class="modal-container glass-ui rounded-2xl p-6 adaptive-text" style="max-width: 800px;">
+            <button class="modal-close-btn">&times;</button>
+            <div id="curriculum-modal-content"></div>
+        </div>
+    </div>
+    
+    <!-- AI Chatbot -->
+    <button id="chat-icon" class="glow-button glass-ui">
+         <svg class="w-8 h-8 adaptive-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 01-2.53-.388A5.887 5.887 0 012.25 12.875a9.76 9.76 0 01-2.53-.388m19.5 0c0-4.556-4.03-8.25-9-8.25A9.76 9.76 0 005.25 3.375a5.887 5.887 0 00-2.25 9.5m19.5 0a8.25 8.25 0 00-3-7.5" /></svg>
+    </button>
+    <div id="chat-widget" class="glass-ui">
+        <div class="p-4 border-b border-[var(--glass-border-dark)]">
+            <h3 class="font-bold text-lg gradient-text">AI Assistant</h3>
+            <p class="text-sm opacity-70">Ask me anything about Srinivas!</p>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col"></div>
+        <div class="p-4 border-t border-[var(--glass-border-dark)]">
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" placeholder="Type your message..." class="w-full bg-transparent border-2 border-transparent focus:border-purple-500 rounded-full px-4 py-2 focus:outline-none adaptive-text">
+                <button id="chat-send-btn" class="glow-button glass-ui rounded-full px-4 py-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 adaptive-text"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg></button>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA ---
+        const curriculumData = {
+            pg: {
+                title: "MCA Curriculum",
+                semesters: [
+                    { name: "Semester 1", status: "Completed", subjects: ["MATHEMATICAL FOUNDATIONS OF AI & ML", "COMPUTER ORGANIZATION AND ARCHITECTURE", "DATABASE MANAGEMENT SYSTEMS", "DATA STRUCTURES", "OPERATING SYSTEMS", "PYTHON PROGRAMMING", "COMMUNICATION SKILLS LAB", "DATABASE MANAGEMENT SYSTEMS LAB", "DATA STRUCTURES LAB", "PYTHON PROGRAMMING LAB", "HEALTH AND WELLNESS, YOGA AND SPORTS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem1_marks.pdf') }}" },
+                    { name: "Semester 2", status: "Completed", subjects: ["ADVANCED JAVA PROGRAMMING", "ARTIFICIAL INTELLIGENCE", "MOBILE APPLICATION DEVELOPMENT", "SOFTWARE ENGINEERING", "ADVANCED JAVA PROGRAMMING LAB", "ARTIFICIAL INTELLIGENCE LAB", "MOBILE APPLICATION DEVELOPMENT LAB", "MINI PROJECT", "AUDIT COURSE-I", "NSS/NCC/SCOUTS & GUIDES/COMMUNITY SERVICE", "OBJECT ORIENTED ANALYSIS AND DESIGN", "BIG DATA ANALYTICS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem2_marks.pdf') }}" },
+                    { name: "Semester 3", status: "Running", subjects: ["Cryptography and Network Security", "Advanced Web Technologies", "Machine Learning", "Data Science & its Applications", "Cloud Application Development", "Web Technologies & Data Science Lab", "Cloud Application Development Lab"], marks_pdf: null },
+                    { name: "Semester 4", status: "Upcoming", subjects: ["Project Work / Internship"], marks_pdf: null }
+                ]
+            },
+            ug: {
+                title: "Advanced BCA Curriculum",
+                semesters: [
+                    { name: "Semester 1", status: "Completed", subjects: [" A Course in communication skills" , "Poetry, Prose, and Grammar", "Entrepreneurship","Public Relations","Mathematical Foundation for Data Science","Data Analytics using Excel","C Programming"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem1_marks.pdf') }}" },
+                    { name: "Semester 2", status: "Completed", subjects: ["A Course in Reading and Writing Skills", "Poetry, Prose and Grammar", "Elementary Statistics", "Business Communication", "Advertising", "Statistical Foundation for Data Science", "Data Analytics using SQL", "Java Programming for Data Science"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem2_marks.pdf') }}" },
+                    { name: "Semester 3", status: "Completed", subjects: ["A Course in Conversational Skills", "Sanskrit", "Environmental Education", "Analytical Skills", "Disaster Management", "Probability and Statistics", "Data Structures", "Introduction to Data Science"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem3_marks.pdf') }}" },
+                    { name: "Semester 4", status: "Completed", subjects: ["Data Analytics Methods", "Probability Distribution", "Accounting and System Approach", "Management", "Web Technology Fundamentals", "Computer Networks", "Data Analytics using Python", "R Language for Data Science"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem4_marks.pdf') }}" },
+                    { name: "Semester 5", status: "Completed", subjects: ["Tableau for Data Visualization", "Cloud Computing", "Software Engineering", "Optimization Techniques for Data Analytics", "Advanced Programming", "Cyber Laws"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem5_marks.pdf') }}" },
+                    { name: "Semester 6", status: "Completed", subjects: ["Long Term Internship"], marks_pdf: "{{ url_for('static', filename='documents/marks/ug_sem6_marks.pdf') }}" }
+                ]
+            }
+        };
+
+        const projectsData = [
+            { id: 0, title: "Population Predictor", category: "web-app", short_desc: "A live ML model that predicts India's population. Built with Python, Flask, and Scikit-learn.", image: "https://placehold.co/600x400/0a0a0a/c084fc?text=Live+Demo", link: "/predictor"},
+            { id: 1, title: "Sales Data Analysis", category: "data-science", short_desc: "An interactive dashboard visualizing sales trends using Python and Matplotlib.", image: "https://placehold.co/600x400/0a0a0a/818cf8?text=Project+One", long_desc: "This project involved analyzing a large sales dataset to identify key performance indicators and trends. I used Pandas for data cleaning and manipulation, NumPy for numerical operations, and created various plots like bar charts, line graphs, and pie charts with Matplotlib to visualize the findings. The insights helped in understanding customer behavior and top-performing products.", tech: ["Python", "Pandas", "NumPy", "Matplotlib"] },
+            { id: 2, title: "Student Management System", category: "data-science", short_desc: "A robust SQL-based system to manage student records, courses, and grades.", image: "https://placehold.co/600x400/0a0a0a/fb923c?text=Project+Two", long_desc: "I designed and implemented a relational database schema using SQL to store and manage student information efficiently. The system allows for adding new students, enrolling them in courses, and updating their grades. This project strengthened my skills in database design, normalization, and writing complex SQL queries.", tech: ["SQL", "Database Design", "Python"] },
+            { id: 3, title: "Weather Data Scraper", category: "data-science", short_desc: "A Python script that scrapes weather data and performs statistical analysis.", image: "https://placehold.co/600x400/0a0a0a/4ade80?text=Project+Three", long_desc: "This automated script fetches real-time weather data from an online API. Using Pandas, it processes and stores the data. I then performed statistical analysis to find correlations between temperature, humidity, and wind speed, showcasing my ability to handle data from external sources and perform analytical tasks.", tech: ["Python", "Pandas", "API", "Data Scraping"] }
+        ];
+        
+        const certsData = [
+            { title: "Data Science Master Program", category: "training", img: "{{ url_for('static', filename='images/certs/data_science_master_cert.png') }}" },
+            { title: "MySQL Certificate", category: "coding", img: "{{ url_for('static', filename='images/certs/mysql_cert.png') }}" },
+            { title: "Java Certificate", category: "coding", img: "{{ url_for('static', filename='images/certs/java_cert.png') }}" },
+            { title: "Python Certificate", category: "coding", img: "{{ url_for('static', filename='images/certs/python_cert.png') }}" },
+            { title: "Inspire Project Competition", category: "school", img: "{{ url_for('static', filename='images/certs/inspire_cert.png') }}" },
+            { title: "Children's Science Congress", category: "school", img: "{{ url_for('static', filename='images/certs/science_congress_cert.png') }}" },
+            { title: "Certificate of Academic Excellence", category: "academic", img: "{{ url_for('static', filename='images/certs/academic_excellence_cert.png') }}" },
+            { title: "Summer Coaching Camp", category: "academic", img: "{{ url_for('static', filename='images/certs/summer_camp_cert.png') }}" }
+        ];
+
+        // --- DOM ELEMENT SELECTORS ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-icon-light');
+        const darkIcon = document.getElementById('theme-icon-dark');
+        const docElement = document.documentElement;
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const projectsGrid = document.getElementById('projects-grid');
+        const filters = document.getElementById('filters');
+        const codingCertsGrid = document.getElementById('coding-certs-grid');
+        const academicCertsGrid = document.getElementById('academic-certs-grid');
+        const modalOverlay = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+        const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const chatIcon = document.getElementById('chat-icon');
+        const chatWidget = document.getElementById('chat-widget');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        const curriculumModalOverlay = document.getElementById('curriculum-modal-overlay');
+        const curriculumModalContent = document.getElementById('curriculum-modal-content');
+        let chatHistory = [];
+
+
+        // --- THEME SWITCHER LOGIC ---
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                docElement.classList.remove('light');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            } else {
+                docElement.classList.add('light');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            }
+        };
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(savedTheme);
+        themeToggle.addEventListener('click', () => {
+            const isLight = docElement.classList.contains('light');
+            const newTheme = isLight ? 'dark' : 'light';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // --- MOBILE MENU LOGIC ---
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') mobileMenu.classList.add('hidden');
+        });
+
+        // --- ON-SCROLL ANIMATION LOGIC ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function reObserve(container) {
+            const newRevealElements = container.querySelectorAll('.reveal');
+            newRevealElements.forEach(el => observer.observe(el));
+        }
+        
+        // --- RENDER FUNCTIONS ---
+        function renderProjects(filter = 'all') {
+            projectsGrid.innerHTML = '';
+            const filteredProjects = projectsData.filter(p => filter === 'all' || p.category === filter);
+            filteredProjects.forEach(p => {
+                const card = document.createElement('div');
+                card.className = `project-card glass-ui glass-card rounded-2xl overflow-hidden reveal`;
+                const buttonOrLink = p.link ? `<a href="${p.link}" class="font-semibold text-purple-400 hover:text-purple-300 transition">View Live Project &rarr;</a>` : `<button data-project-id="${p.id}" class="view-details-btn font-semibold text-purple-400 hover:text-purple-300 transition">View Details &rarr;</button>`;
+                card.innerHTML = `<img src="${p.image}" alt="${p.title}" class="w-full h-48 object-cover"><div class="p-6 text-left"><h3 class="text-2xl font-bold mb-2 adaptive-text">${p.title}</h3><p class="mb-4 opacity-80">${p.short_desc}</p>${buttonOrLink}</div>`;
+                projectsGrid.appendChild(card);
+            });
+            reObserve(projectsGrid);
+        }
+
+        function renderCerts() {
+            codingCertsGrid.innerHTML = '';
+            academicCertsGrid.innerHTML = '';
+
+            certsData.forEach(cert => {
+                const certHTML = `<a href="${cert.img}" class="cert-link block glass-ui glass-card rounded-2xl overflow-hidden p-2 reveal"><img src="${cert.img}" alt="${cert.title}" class="w-full h-full object-contain"></a>`;
+                if (cert.category === 'coding') {
+                    codingCertsGrid.innerHTML += certHTML;
+                } else if (cert.category === 'school' || cert.category === 'academic') {
+                    academicCertsGrid.innerHTML += certHTML;
+                }
+            });
+            reObserve(document.getElementById('certifications'));
+        }
+        
+        // --- EVENT LISTENERS ---
+        filters.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                e.target.classList.add('active');
+                const filter = e.target.dataset.filter;
+                Array.from(projectsGrid.children).forEach(card => card.classList.add('hidden'));
+                setTimeout(() => renderProjects(filter), 300);
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const callGemini = async (payload) => {
+            const apiUrl = '/api/chat';
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+                return response.json();
+            } catch (error) {
+                console.error("API Call Error:", error);
+                throw error;
+            }
+        };
+
+        function openModal(project) {
+            modalContent.innerHTML = `<h2 class="text-3xl font-bold mb-4 gradient-text">${project.title}</h2><p class="text-lg mb-4 opacity-90">${project.long_desc}</p><div class="flex flex-wrap gap-2 mb-6">${project.tech.map(t => `<span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">${t}</span>`).join('')}</div><button data-desc="${project.long_desc}" id="explain-project-btn" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold glow-button glass-ui adaptive-text">✨ Explain This Project with AI <svg id="explain-loading" class="animate-spin h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></button><div id="ai-explanation" class="mt-4 p-4 rounded-lg glass-ui hidden"></div>`;
+            modalOverlay.classList.add('active');
+        }
+        projectsGrid.addEventListener('click', e => {
+            if (e.target.classList.contains('view-details-btn')) {
+                const projectId = parseInt(e.target.dataset.projectId);
+                const project = projectsData.find(p => p.id === projectId);
+                if (project) openModal(project);
+            }
+        });
+        modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay || e.target.closest('.modal-close-btn')) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+        modalContent.addEventListener('click', async (e) => {
+            const explainBtn = e.target.closest('#explain-project-btn');
+            if (explainBtn && !explainBtn.disabled) {
+                const description = explainBtn.dataset.desc;
+                const spinner = document.getElementById('explain-loading');
+                const explanationBox = document.getElementById('ai-explanation');
+                explainBtn.disabled = true;
+                spinner.classList.remove('hidden');
+                explanationBox.classList.add('hidden');
+                try {
+                    const payload = { contents: [{ parts: [{ text: `Explain the following project concept in simple, non-technical terms for a general audience in about 2-3 sentences. Project description: "${description}"` }] }] };
+                    const result = await callGemini(payload);
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (text) { explanationBox.textContent = text; }
+                    else { throw new Error("Invalid response from AI."); }
+                } catch (error) {
+                    explanationBox.textContent = "Sorry, I couldn't generate an explanation right now.";
+                    console.error("Explanation error:", error);
+                } finally {
+                    explanationBox.classList.remove('hidden');
+                    explainBtn.disabled = false;
+                    spinner.classList.add('hidden');
+                }
+            }
+        });
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-contact-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if(response.ok) {
+                    formStatus.textContent = result.success;
+                    formStatus.className = 'mt-6 text-lg text-green-400';
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Something went wrong.');
+                }
+            } catch (error) {
+                formStatus.textContent = `Error: ${error.message}`;
+                formStatus.className = 'mt-6 text-lg text-red-400';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+        
+        document.body.addEventListener('click', e => {
+            if (e.target.closest('.cert-link')) {
+                e.preventDefault();
+                const imgSrc = e.target.closest('.cert-link').href;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+            }
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        document.body.addEventListener('click', (e) => {
+            if (e.target.classList.contains('view-curriculum-btn')) {
+                const type = e.target.dataset.curriculum;
+                openCurriculumModal(type);
+            }
+        });
+
+        function openCurriculumModal(type) {
+            const data = curriculumData[type];
+            let semesterTabs = data.semesters.map((sem, index) => `<button data-sem="${index}" class="semester-tab ${index === 0 ? 'active' : ''} glass-ui adaptive-text px-4 py-2 rounded-lg border-2 border-transparent">${sem.name}</button>`).join('');
+            
+            let semesterContents = data.semesters.map((sem, index) => {
+                const subjectsList = sem.subjects.map(sub => `<li class="glass-ui rounded-lg p-3">${sub}</li>`).join('');
+                
+                let marksButton;
+                if (sem.marks_pdf && sem.status === 'Completed') {
+                    marksButton = `<a href="${sem.marks_pdf}" target="_blank" class="glow-button glass-ui adaptive-text px-3 py-1 rounded-full text-sm">View Marks</a>`;
+                } else {
+                    const marksButtonDisabled = sem.status !== 'Completed' ? 'disabled' : '';
+                    marksButton = `<button ${marksButtonDisabled} class="glow-button glass-ui adaptive-text px-3 py-1 rounded-full text-sm">View Marks</button>`;
+                }
+                
+                return `
+                    <div id="sem-content-${index}" class="sem-content ${index === 0 ? '' : 'hidden'} mt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-bold text-lg">${sem.name} <span class="text-sm opacity-70">(${sem.status})</span></span>
+                            ${marksButton}
+                        </div>
+                        <ul class="space-y-2 text-left">${subjectsList}</ul>
+                    </div>`;
+            }).join('');
+
+            curriculumModalContent.innerHTML = `<h2 class="text-3xl font-bold mb-6 gradient-text">${data.title}</h2><div class="flex flex-wrap gap-2 mb-4" id="semester-tabs">${semesterTabs}</div><div id="semester-contents">${semesterContents}</div>`;
+            curriculumModalOverlay.classList.add('active');
+        }
+
+        curriculumModalOverlay.addEventListener('click', (e) => {
+            if (e.target === curriculumModalOverlay || e.target.closest('.modal-close-btn')) {
+                curriculumModalOverlay.classList.remove('active');
+            }
+            if (e.target.classList.contains('semester-tab')) {
+                const semIndex = e.target.dataset.sem;
+                curriculumModalContent.querySelector('.semester-tab.active').classList.remove('active');
+                e.target.classList.add('active');
+
+                curriculumModalContent.querySelectorAll('.sem-content').forEach(el => el.classList.add('hidden'));
+                curriculumModalContent.querySelector(`#sem-content-${semIndex}`).classList.remove('hidden');
+            }
+        });
+
+        const portfolioContext = `Name: Srinivas Kumar. Education: 2nd year MCA student at Narayana Engineering College, Nellore. Skills: Python, SQL, NumPy, Pandas, Matplotlib, Data Analysis, Database Management, Scikit-learn, Machine Learning, Power BI, Jupyter, Google Colab, Excel, Google Analytics, Google Data Studio. Training: Data Science Master Program at Besant Technologies. Projects: 1. Population Predictor (live demo). 2. Sales Data Analysis Dashboard. 3. Student Management System. 4. Weather Data Scraper & Analyzer. Personality: Passionate about technology, problem-solving, and eager to learn.`;
+        const systemPrompt = `You are a friendly and professional AI assistant for Srinivas Kumar's portfolio. Your goal is to answer questions from visitors. Use ONLY the information provided in the following context. If a question is outside this context, politely state that you only have information about Srinivas's professional portfolio. CONTEXT: ${portfolioContext}`;
+        
+        chatIcon.addEventListener('click', () => chatWidget.classList.toggle('active'));
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+        async function sendMessage() {
+            const userText = chatInput.value.trim();
+            if (!userText || chatSendBtn.disabled) return;
+            addMessage(userText, 'user');
+            chatInput.value = '';
+            chatSendBtn.disabled = true;
+            addTypingIndicator();
+            
+            const currentChat = [...chatHistory, { role: "user", parts: [{ text: userText }] }];
+
+            try {
+                const payload = {
+                    contents: currentChat,
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+                const result = await callGemini(payload);
+                const modelText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (modelText) {
+                    addMessage(modelText, 'model');
+                    chatHistory.push({ role: "user", parts: [{ text: userText }] });
+                    chatHistory.push({ role: "model", parts: [{ text: modelText }] });
+                } else { addMessage("Sorry, I encountered an error. Please try again.", 'model'); }
+            } catch (error) {
+                addMessage("I'm having trouble connecting. Please check back later.", 'model');
+                console.error("Chatbot error:", error);
+            } finally {
+                removeTypingIndicator();
+                chatSendBtn.disabled = false;
+                chatInput.focus();
+            }
+        }
+        
+        function addMessage(text, sender) {
+            const messageEl = document.createElement('div');
+            messageEl.classList.add('chat-message', sender === 'user' ? 'user-message' : 'model-message');
+            messageEl.textContent = text;
+            chatMessages.appendChild(messageEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        function addTypingIndicator() {
+            const typingEl = document.createElement('div');
+            typingEl.id = 'typing-indicator';
+            typingEl.classList.add('chat-message', 'model-message');
+            typingEl.innerHTML = `<div class="flex items-center gap-1.5"><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse [animation-delay:-0.3s]"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse [animation-delay:-0.15s]"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div></div>`;
+            chatMessages.appendChild(typingEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if(indicator) indicator.remove();
+        }
+
+        // --- INITIAL RENDERS ---
+        renderProjects();
+        renderCerts();
+        // Initial observation for elements present on page load
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+</script>
+</body>
+</html>
+

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Population Predictor - Srinivas Kumar</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A live machine learning model to predict the population of India, a project by Srinivas Kumar.">
+    <meta property="og:title" content="Population Predictor - Srinivas Kumar">
+    <meta property="og:description" content="A live machine learning model to predict the population of India.">
+    <meta property="twitter:title" content="Population Predictor - Srinivas Kumar">
+    <meta property="twitter:description" content="A live machine learning model to predict the population of India.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color-light: #18181b;
+            --text-color-dark: #e0e0e0;
+            --glass-bg-light: rgba(255, 255, 255, 0.5);
+            --glass-border-light: rgba(255, 255, 255, 0.8);
+            --glass-bg-dark: rgba(26, 26, 26, 0.3);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent;
+            color: var(--text-color-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, hsl(0, 0%, 10%) 0%, hsl(0, 0%, 4%) 100%);
+            transition: background 0.3s ease;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+        }
+        .shape1 { width: 400px; height: 400px; background: rgba(192, 132, 252, 0.4); top: -100px; left: -100px; animation: move1 20s infinite alternate; }
+        .shape2 { width: 500px; height: 500px; background: rgba(56, 189, 248, 0.4); bottom: -150px; right: -150px; animation: move2 25s infinite alternate; }
+        .shape3 { width: 300px; height: 300px; background: rgba(163, 230, 53, 0.3); bottom: 100px; left: 150px; animation: move3 18s infinite alternate; }
+
+        @keyframes move1 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(200px, 300px) rotate(360deg); } }
+        @keyframes move2 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-300px, -200px) rotate(-360deg); } }
+        @keyframes move3 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-200px, 200px) rotate(180deg); } }
+
+        /* Glassmorphism Styles */
+        .glass-ui {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border-dark);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+        }
+
+        html.light .glass-ui {
+            background: var(--glass-bg-light);
+            border: 1px solid var(--glass-border-light);
+        }
+        
+        html.light body {
+             background-color: transparent;
+             color: var(--text-color-light);
+        }
+        html.light .background-container { 
+            background: radial-gradient(ellipse at center, hsl(220, 50%, 95%) 0%, hsl(240, 50%, 92%) 100%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #a3e635, #4ade80, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-animation 5s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+        }
+        
+        .glow-button {
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+        .glow-button:hover:not(:disabled) {
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.8);
+            border-color: rgba(192, 132, 252, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .adaptive-text { color: var(--text-color-dark); }
+        html.light .adaptive-text { color: var(--text-color-light); }
+        .adaptive-placeholder::placeholder { color: #9ca3af; }
+        html.light .adaptive-placeholder::placeholder { color: #6b7280; }
+    </style>
+</head>
+<body class="min-h-screen grid place-items-center p-4">
+
+    <div class="background-container">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="absolute top-6 left-6 right-6 flex justify-between items-center">
+        <a href="/" class="px-4 py-2 rounded-xl glass-ui font-semibold hover:border-purple-400 transition-colors duration-300 adaptive-text">&larr; Back to Portfolio</a>
+        <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center glass-ui focus:outline-none">
+            <svg id="theme-icon-light" class="w-6 h-6 adaptive-text hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg id="theme-icon-dark" class="w-6 h-6 adaptive-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+    </div>
+
+    <main class="w-full max-w-4xl flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+        <div class="w-full md:w-1/2 text-center md:text-left">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                <span class="gradient-text">Population Predictor</span>
+            </h1>
+            <p class="text-lg mb-6 opacity-90">
+                This project uses a machine learning model to predict the population of India for a given year. The model was trained on historical population data using a Linear Regression algorithm.
+            </p>
+            <h2 class="text-2xl font-bold mb-3">Technology Stack:</h2>
+            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                <span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">Python</span>
+                <span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">Flask</span>
+                <span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">NumPy & Pandas</span>
+                <span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">Matplotlib</span>
+                <span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">Scikit-learn</span>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2">
+            <div class="glass-ui p-8 md:p-10 text-center rounded-2xl">
+                <form id="yearForm" class="space-y-6">
+                    <label for="year" class="block text-xl font-semibold mb-2">Enter a Year</label>
+                    <input type="number" id="year" name="year" placeholder="e.g., 2030" step="1" class="w-full text-center text-lg px-4 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text adaptive-placeholder">
+                    <button type="submit" id="submitBtn" class="w-full glow-button font-bold text-lg py-3 rounded-lg transition glass-ui adaptive-text">
+                        Predict Population
+                    </button>
+                </form>
+                <div id="resultContainer" class="mt-6 min-h-[6rem] flex items-center justify-center p-4 rounded-lg glass-ui">
+                    <div id="result" class="text-lg font-semibold text-center opacity-80">
+                        Your prediction will appear here.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("yearForm");
+        const resultDiv = document.getElementById("result");
+        const submitBtn = document.getElementById("submitBtn");
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-icon-light');
+        const darkIcon = document.getElementById('theme-icon-dark');
+        const docElement = document.documentElement;
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                docElement.classList.remove('light');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            } else {
+                docElement.classList.add('light');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            }
+        };
+
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const isLight = docElement.classList.contains('light');
+            const newTheme = isLight ? 'dark' : 'light';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const yearInput = document.getElementById("year").value;
+            
+            if (!yearInput || yearInput.length < 4) {
+                resultDiv.innerHTML = '<span class="text-yellow-400">⚠️ Please enter a valid 4-digit year.</span>';
+                return;
+            }
+
+            const year = parseInt(yearInput);
+            if (year < 2020) {
+                 resultDiv.innerHTML = '<span class="text-yellow-400">⚠️ Please enter a year after 2020.</span>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<span class="opacity-70">Predicting...</span>';
+            submitBtn.disabled = true;
+
+            fetch("/population_india", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `year=${year}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    resultDiv.innerHTML = `<span class="text-red-400">❌ Error: ${data.error}</span>`;
+                } else if (data.predicted_population && !isNaN(data.predicted_population)) {
+                    const formattedPopulation = new Intl.NumberFormat('en-IN').format(data.predicted_population);
+                    resultDiv.innerHTML = `✅ Predicted Population: <br><strong class="text-2xl gradient-text">${formattedPopulation}</strong>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="text-red-400">❌ Could not get a valid prediction.</span>`;
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                resultDiv.innerHTML = '<span class="text-red-400">❌ An error occurred.</span>';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+
