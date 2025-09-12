@@ -128,7 +128,7 @@
         html.light .adaptive-text { color: var(--text-color-light); }
 
         section { padding: 8rem 1rem; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; transition-delay: 0.3s; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         
         /* Timeline */
@@ -158,14 +158,30 @@
         .semester-tab { cursor: pointer; transition: all 0.3s ease; }
         .semester-tab.active { background-color: rgba(192, 132, 252, 0.3); border-color: rgba(192, 132, 252, 0.8); }
 
-
-        #chat-icon { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         #chat-widget { position: fixed; bottom: 7rem; right: 2rem; z-index: 998; width: 350px; max-width: 90vw; height: 500px;  box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; transform: scale(0.95) translateY(10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; border-radius: 1rem; }
         #chat-widget.active { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
         .chat-message { padding: 0.75rem 1rem; border-radius: 1rem; margin-bottom: 0.5rem; max-width: 80%; line-height: 1.4; }
         .user-message { background-color: #818cf8; color: white; align-self: flex-end; border-bottom-right-radius: 0.25rem; }
         .model-message { background-color: rgba(255,255,255,0.2); align-self: flex-start; border-bottom-left-radius: 0.25rem; }
         html.light .model-message { background-color: rgba(0,0,0,0.1); }
+
+        /* Welcome Screen Animation */
+        #welcome-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, hsl(0, 0%, 10%) 0%, hsl(0, 0%, 4%) 100%); transition: opacity 0.8s ease-out; }
+        html.light #welcome-screen { background: radial-gradient(ellipse at center, hsl(220, 50%, 95%) 0%, hsl(240, 50%, 92%) 100%); }
+        #welcome-screen.hidden-welcome { opacity: 0; pointer-events: none; }
+        #welcome-screen img { width: 150px; height: 150px; border-radius: 50%; box-shadow: 0 0 30px rgba(192, 132, 252, 0.8); animation: zoomIn 1.5s ease-out forwards; }
+        @keyframes zoomIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        /* Chatbot Icon & Popup */
+        #chat-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
+        #chat-icon { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(192, 132, 252, 0); } 100% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0); } }
+        #chat-popup { position: absolute; bottom: 100%; right: 0; margin-bottom: 1rem; padding: 0.75rem 1.25rem; border-radius: 1rem; border-bottom-right-radius: 0; white-space: nowrap; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; }
+        #chat-popup.show-popup { opacity: 1; transform: translateY(0); }
+        #chat-popup-tail { position: absolute; bottom: -10px; right: 10px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; }
+        html.dark #chat-popup-tail { border-top: 10px solid var(--glass-bg-dark); }
+        html.light #chat-popup-tail { border-top: 10px solid var(--glass-bg-light); }
+
 
         @media screen and (max-width: 768px) {
             .timeline::after { left: 31px; }
@@ -175,12 +191,13 @@
             section { padding: 4rem 1rem; }
             h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
             #chat-widget { bottom: 6rem; right: 1rem; width: calc(100vw - 2rem); }
-            #chat-icon { bottom: 1rem; right: 1rem; }
+            #chat-container { bottom: 1rem; right: 1rem; }
         }
 
     </style>
 </head>
 <body>
+
     <div class="background-container">
         <div class="shape shape1"></div>
         <div class="shape shape2"></div>
@@ -223,7 +240,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="transition-opacity duration-500">
         <section id="home" class="min-h-screen flex items-center justify-center text-center -mt-16 reveal">
             <div class="container mx-auto px-4">
                 <h1 class="text-4xl md:text-7xl font-extrabold mb-4 leading-tight">
@@ -271,7 +288,7 @@
                                 <p class="text-sm opacity-80">Nellore</p>
                                 <p class="text-sm mt-2 opacity-60">(Pursuing 2nd Year)</p>
                             </a>
-                            <button data-curriculum="pg" class="view-curriculum-btn mt-4 glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
+                            <button data-curriculum="pg" class="view-curriculum-btn mt-4 glow-button glass-ui curriculum-btn-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
                         </div>
                     </div>
                     <!-- Training -->
@@ -294,7 +311,7 @@
                                 <p class="font-semibold adaptive-text">Krishna Chaitanya Degree College</p>
                                 <p class="text-sm opacity-80">Vikrama Simhapuri University, Nellore</p>
                             </a>
-                            <button data-curriculum="ug" class="view-curriculum-btn mt-4 glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
+                            <button data-curriculum="ug" class="view-curriculum-btn mt-4 glow-button glass-ui curriculum-btn-text px-4 py-2 rounded-full text-sm">View Curriculum</button>
                         </div>
                     </div>
                     <!-- Intermediate -->
@@ -368,9 +385,9 @@
                         <img src="{{ url_for('static', filename='svgs/google_data_studio.svg') }}" alt="Google Data Studio Logo" class="w-16 h-16 mb-2 object-contain">
                         <h3 class="text-lg font-semibold adaptive-text">Google Data Studio</h3>
                     </div>
-                    <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
-                        <img src="{{ url_for('static', filename='svgs/web_scrapping.svg') }}" alt="Web scrapping Logo" class="w-16 h-16 mb-2 object-contain">
-                        <h3 class="text-lg font-semibold adaptive-text">Web Scrapping</h3>
+                     <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
+                        <img src="{{ url_for('static', filename='svgs/web_scraping.svg') }}" alt="Web Scraping Logo" class="w-16 h-16 mb-2 object-contain">
+                        <h3 class="text-lg font-semibold adaptive-text">Web Scraping</h3>
                     </div>
                 </div>
             </div>
@@ -451,9 +468,25 @@
     </div>
     
     <!-- AI Chatbot -->
-    <button id="chat-icon" class="glow-button glass-ui">
-         <svg class="w-8 h-8 adaptive-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 01-2.53-.388A5.887 5.887 0 012.25 12.875a9.76 9.76 0 01-2.53-.388m19.5 0c0-4.556-4.03-8.25-9-8.25A9.76 9.76 0 005.25 3.375a5.887 5.887 0 00-2.25 9.5m19.5 0a8.25 8.25 0 00-3-7.5" /></svg>
-    </button>
+    <div id="chat-container">
+        <div id="chat-popup" class="glass-ui adaptive-text">
+            Hey..! How can I help you?
+            <div id="chat-popup-tail"></div>
+        </div>
+        <button id="chat-icon" class="glow-button glass-ui">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gemini-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color: #34b02e;" />
+                        <stop offset="50%" style="stop-color: #940c4b;" />
+                        <stop offset="100%" style="stop-color: #36999e;" />
+                    </linearGradient>
+                </defs>
+                <path fill="url(#gemini-gradient)" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.25 12H9.75v-2.25h4.5V12zm0-4.5h-4.5V7.5h4.5v2.25z"/>
+            </svg>
+        </button>
+    </div>
+
     <div id="chat-widget" class="glass-ui">
         <div class="p-4 border-b border-[var(--glass-border-dark)]">
             <h3 class="font-bold text-lg gradient-text">AI Assistant</h3>
@@ -478,7 +511,7 @@
                 semesters: [
                     { name: "Semester 1", status: "Completed", subjects: ["MATHEMATICAL FOUNDATIONS OF AI & ML", "COMPUTER ORGANIZATION AND ARCHITECTURE", "DATABASE MANAGEMENT SYSTEMS", "DATA STRUCTURES", "OPERATING SYSTEMS", "PYTHON PROGRAMMING", "COMMUNICATION SKILLS LAB", "DATABASE MANAGEMENT SYSTEMS LAB", "DATA STRUCTURES LAB", "PYTHON PROGRAMMING LAB", "HEALTH AND WELLNESS, YOGA AND SPORTS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem1_marks.pdf') }}" },
                     { name: "Semester 2", status: "Completed", subjects: ["ADVANCED JAVA PROGRAMMING", "ARTIFICIAL INTELLIGENCE", "MOBILE APPLICATION DEVELOPMENT", "SOFTWARE ENGINEERING", "ADVANCED JAVA PROGRAMMING LAB", "ARTIFICIAL INTELLIGENCE LAB", "MOBILE APPLICATION DEVELOPMENT LAB", "MINI PROJECT", "AUDIT COURSE-I", "NSS/NCC/SCOUTS & GUIDES/COMMUNITY SERVICE", "OBJECT ORIENTED ANALYSIS AND DESIGN", "BIG DATA ANALYTICS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem2_marks.pdf') }}" },
-                    { name: "Semester 3", status: "Running", subjects: ["COMPUTER NETWORKS","FULLSTACK DEVELOPMENT"], marks_pdf: null },
+                    { name: "Semester 3", status: "Running", subjects: ["Cryptography and Network Security", "Advanced Web Technologies", "Machine Learning", "Data Science & its Applications", "Cloud Application Development", "Web Technologies & Data Science Lab", "Cloud Application Development Lab"], marks_pdf: null },
                     { name: "Semester 4", status: "Upcoming", subjects: ["Project Work / Internship"], marks_pdf: null }
                 ]
             },
@@ -494,7 +527,6 @@
                 ]
             }
         };
-
         const projectsData = [
             { id: 0, title: "Population Predictor", category: "web-app", short_desc: "A live ML model that predicts India's population. Built with Python, Flask, and Scikit-learn.", image: "https://placehold.co/600x400/0a0a0a/c084fc?text=Live+Demo", link: "/predictor"},
             { id: 1, title: "Sales Data Analysis", category: "data-science", short_desc: "An interactive dashboard visualizing sales trends using Python and Matplotlib.", image: "https://placehold.co/600x400/0a0a0a/818cf8?text=Project+One", long_desc: "This project involved analyzing a large sales dataset to identify key performance indicators and trends. I used Pandas for data cleaning and manipulation, NumPy for numerical operations, and created various plots like bar charts, line graphs, and pie charts with Matplotlib to visualize the findings. The insights helped in understanding customer behavior and top-performing products.", tech: ["Python", "Pandas", "NumPy", "Matplotlib"] },
@@ -601,6 +633,7 @@
             academicCertsGrid.innerHTML = '';
 
             certsData.forEach(cert => {
+                if (cert.category === 'training') return; 
                 const certHTML = `<a href="${cert.img}" class="cert-link block glass-ui glass-card rounded-2xl overflow-hidden p-2 reveal"><img src="${cert.img}" alt="${cert.title}" class="w-full h-full object-contain"></a>`;
                 if (cert.category === 'coding') {
                     codingCertsGrid.innerHTML += certHTML;
@@ -840,6 +873,15 @@
         renderCerts();
         // Initial observation for elements present on page load
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const chatPopup = document.getElementById('chat-popup');
+        setTimeout(() => {
+            chatPopup.classList.add('show-popup');
+            setTimeout(() => {
+                chatPopup.classList.remove('show-popup');
+            }, 5000); // Hide after 5 seconds
+        }, 3000); // Show after 3 seconds
+
     });
 </script>
 </body>
