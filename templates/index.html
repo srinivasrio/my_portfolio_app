@@ -126,9 +126,11 @@
 
         .adaptive-text { color: var(--text-color-dark); }
         html.light .adaptive-text { color: var(--text-color-light); }
+        .curriculum-btn-text { color: #c084fc; } 
+        html.light .curriculum-btn-text { color: #9333ea; }
 
         section { padding: 8rem 1rem; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; transition-delay: 0.3s; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         
         /* Timeline */
@@ -164,13 +166,6 @@
         .user-message { background-color: #818cf8; color: white; align-self: flex-end; border-bottom-right-radius: 0.25rem; }
         .model-message { background-color: rgba(255,255,255,0.2); align-self: flex-start; border-bottom-left-radius: 0.25rem; }
         html.light .model-message { background-color: rgba(0,0,0,0.1); }
-
-        /* Welcome Screen Animation */
-        #welcome-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, hsl(0, 0%, 10%) 0%, hsl(0, 0%, 4%) 100%); transition: opacity 0.8s ease-out; }
-        html.light #welcome-screen { background: radial-gradient(ellipse at center, hsl(220, 50%, 95%) 0%, hsl(240, 50%, 92%) 100%); }
-        #welcome-screen.hidden-welcome { opacity: 0; pointer-events: none; }
-        #welcome-screen img { width: 150px; height: 150px; border-radius: 50%; box-shadow: 0 0 30px rgba(192, 132, 252, 0.8); animation: zoomIn 1.5s ease-out forwards; }
-        @keyframes zoomIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
         /* Chatbot Icon & Popup */
         #chat-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
@@ -181,7 +176,6 @@
         #chat-popup-tail { position: absolute; bottom: -10px; right: 10px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; }
         html.dark #chat-popup-tail { border-top: 10px solid var(--glass-bg-dark); }
         html.light #chat-popup-tail { border-top: 10px solid var(--glass-bg-light); }
-
 
         @media screen and (max-width: 768px) {
             .timeline::after { left: 31px; }
@@ -197,7 +191,6 @@
     </style>
 </head>
 <body>
-
     <div class="background-container">
         <div class="shape shape1"></div>
         <div class="shape shape2"></div>
@@ -474,11 +467,11 @@
             <div id="chat-popup-tail"></div>
         </div>
         <button id="chat-icon" class="glow-button glass-ui">
-            <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="gemini-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color: #34b02e;" />
-                        <stop offset="50%" style="stop-color: #940c4b;" />
+                        <stop offset="0%" style="stop-color: #36999e;" />
+                        <stop offset="50%" style="stop-color: #d1151b;" />
                         <stop offset="100%" style="stop-color: #36999e;" />
                     </linearGradient>
                 </defs>
@@ -511,7 +504,7 @@
                 semesters: [
                     { name: "Semester 1", status: "Completed", subjects: ["MATHEMATICAL FOUNDATIONS OF AI & ML", "COMPUTER ORGANIZATION AND ARCHITECTURE", "DATABASE MANAGEMENT SYSTEMS", "DATA STRUCTURES", "OPERATING SYSTEMS", "PYTHON PROGRAMMING", "COMMUNICATION SKILLS LAB", "DATABASE MANAGEMENT SYSTEMS LAB", "DATA STRUCTURES LAB", "PYTHON PROGRAMMING LAB", "HEALTH AND WELLNESS, YOGA AND SPORTS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem1_marks.pdf') }}" },
                     { name: "Semester 2", status: "Completed", subjects: ["ADVANCED JAVA PROGRAMMING", "ARTIFICIAL INTELLIGENCE", "MOBILE APPLICATION DEVELOPMENT", "SOFTWARE ENGINEERING", "ADVANCED JAVA PROGRAMMING LAB", "ARTIFICIAL INTELLIGENCE LAB", "MOBILE APPLICATION DEVELOPMENT LAB", "MINI PROJECT", "AUDIT COURSE-I", "NSS/NCC/SCOUTS & GUIDES/COMMUNITY SERVICE", "OBJECT ORIENTED ANALYSIS AND DESIGN", "BIG DATA ANALYTICS"], marks_pdf: "{{ url_for('static', filename='documents/marks/pg_sem2_marks.pdf') }}" },
-                    { name: "Semester 3", status: "Running", subjects: ["Cryptography and Network Security", "Advanced Web Technologies", "Machine Learning", "Data Science & its Applications", "Cloud Application Development", "Web Technologies & Data Science Lab", "Cloud Application Development Lab"], marks_pdf: null },
+                    { name: "Semester 3", status: "Running", subjects: ["COMPUTER NETWORKS", "FULLSTACK DEVELOPMENT", "SOFTWARE PROJECT MANAGEMENT", "DATA SCIENCE", "CLOUD COMPUTING", "SMALL BUSINESS & ENTREPRENEURSHIP", "COMPUTER NETWORKS LAB","FULLSTACK DEVELOPMENT LAB,DATA SCIENCE LAB"], marks_pdf: null },
                     { name: "Semester 4", status: "Upcoming", subjects: ["Project Work / Internship"], marks_pdf: null }
                 ]
             },
@@ -529,9 +522,9 @@
         };
         const projectsData = [
             { id: 0, title: "Population Predictor", category: "web-app", short_desc: "A live ML model that predicts India's population. Built with Python, Flask, and Scikit-learn.", image: "https://placehold.co/600x400/0a0a0a/c084fc?text=Live+Demo", link: "/predictor"},
-            { id: 1, title: "Sales Data Analysis", category: "data-science", short_desc: "An interactive dashboard visualizing sales trends using Python and Matplotlib.", image: "https://placehold.co/600x400/0a0a0a/818cf8?text=Project+One", long_desc: "This project involved analyzing a large sales dataset to identify key performance indicators and trends. I used Pandas for data cleaning and manipulation, NumPy for numerical operations, and created various plots like bar charts, line graphs, and pie charts with Matplotlib to visualize the findings. The insights helped in understanding customer behavior and top-performing products.", tech: ["Python", "Pandas", "NumPy", "Matplotlib"] },
-            { id: 2, title: "Student Management System", category: "data-science", short_desc: "A robust SQL-based system to manage student records, courses, and grades.", image: "https://placehold.co/600x400/0a0a0a/fb923c?text=Project+Two", long_desc: "I designed and implemented a relational database schema using SQL to store and manage student information efficiently. The system allows for adding new students, enrolling them in courses, and updating their grades. This project strengthened my skills in database design, normalization, and writing complex SQL queries.", tech: ["SQL", "Database Design", "Python"] },
-            { id: 3, title: "Weather Data Scraper", category: "data-science", short_desc: "A Python script that scrapes weather data and performs statistical analysis.", image: "https://placehold.co/600x400/0a0a0a/4ade80?text=Project+Three", long_desc: "This automated script fetches real-time weather data from an online API. Using Pandas, it processes and stores the data. I then performed statistical analysis to find correlations between temperature, humidity, and wind speed, showcasing my ability to handle data from external sources and perform analytical tasks.", tech: ["Python", "Pandas", "API", "Data Scraping"] }
+            { id: 1, title: "Sales Data Analysis", category: "data-science", short_desc: "An interactive dashboard visualizing sales trends using Python and Matplotlib.", image: "https://placehold.co/600x400/0a0a0a/818cf8?text=Working...", long_desc: "This project involved analyzing a large sales dataset to identify key performance indicators and trends. I used Pandas for data cleaning and manipulation, NumPy for numerical operations, and created various plots like bar charts, line graphs, and pie charts with Matplotlib to visualize the findings. The insights helped in understanding customer behavior and top-performing products.", tech: ["Python", "Pandas", "NumPy", "Matplotlib"] },
+            { id: 2, title: "Student Management System", category: "data-science", short_desc: "A robust SQL-based system to manage student records, courses, and grades.", image: "https://placehold.co/600x400/0a0a0a/fb923c?text=Coming+Soon", long_desc: "I designed and implemented a relational database schema using SQL to store and manage student information efficiently. The system allows for adding new students, enrolling them in courses, and updating their grades. This project strengthened my skills in database design, normalization, and writing complex SQL queries.", tech: ["SQL", "Database Design", "Python"] },
+            { id: 3, title: "Weather Data Scraper", category: "data-science", short_desc: "A Python script that scrapes weather data and performs statistical analysis.", image: "https://placehold.co/600x400/0a0a0a/4ade80?text= Coming+Soon", long_desc: "This automated script fetches real-time weather data from an online API. Using Pandas, it processes and stores the data. I then performed statistical analysis to find correlations between temperature, humidity, and wind speed, showcasing my ability to handle data from external sources and perform analytical tasks.", tech: ["Python", "Pandas", "API", "Data Scraping"] }
         ];
         
         const certsData = [
@@ -675,7 +668,7 @@
         };
 
         function openModal(project) {
-            modalContent.innerHTML = `<h2 class="text-3xl font-bold mb-4 gradient-text">${project.title}</h2><p class="text-lg mb-4 opacity-90">${project.long_desc}</p><div class="flex flex-wrap gap-2 mb-6">${project.tech.map(t => `<span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">${t}</span>`).join('')}</div><button data-desc="${project.long_desc}" id="explain-project-btn" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold glow-button glass-ui adaptive-text">✨ Explain This Project with AI <svg id="explain-loading" class="animate-spin h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></button><div id="ai-explanation" class="mt-4 p-4 rounded-lg glass-ui hidden"></div>`;
+            modalContent.innerHTML = `<h2 class="text-3xl font-bold mb-4 gradient-text">${project.title}</h2><p class="text-lg mb-4 opacity-90">${project.long_desc}</p><div class="flex flex-wrap gap-2 mb-6">${project.tech.map(t => `<span class="glass-ui text-sm font-medium px-3 py-1 rounded-full adaptive-text">${t}</span>`).join('')}</div><button data-desc="${project.long_desc}" id="explain-project-btn" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold glow-button glass-ui adaptive-text"> Explain This Project <svg id="explain-loading" class="animate-spin h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></button><div id="ai-explanation" class="mt-4 p-4 rounded-lg glass-ui hidden"></div>`;
             modalOverlay.classList.add('active');
         }
         projectsGrid.addEventListener('click', e => {
@@ -809,10 +802,20 @@
             }
         });
 
-        const portfolioContext = `Name: Srinivas Kumar. Education: 2nd year MCA student at Narayana Engineering College, Nellore. Skills: Python, SQL, NumPy, Pandas, Matplotlib, Data Analysis, Database Management, Scikit-learn, Machine Learning, Power BI, Jupyter, Google Colab, Excel, Google Analytics, Google Data Studio. Training: Data Science Master Program at Besant Technologies. Projects: 1. Population Predictor (live demo). 2. Sales Data Analysis Dashboard. 3. Student Management System. 4. Weather Data Scraper & Analyzer. Personality: Passionate about technology, problem-solving, and eager to learn.`;
+        const portfolioContext = `Name: Srinivas Kumar. Education: 2nd year MCA student at Narayana Engineering College, Nellore. Skills: Python, SQL, NumPy, Pandas, Matplotlib, Data Analysis, Database Management, Scikit-learn, Machine Learning, Power BI, Jupyter, Google Colab, Excel, Google Analytics, Google Data Studio. Training: Data Science Master Program at Besant Technologies. Projects: 1. Population Predictor (live Project). 2. Sales Data Analysis Dashboard. 3. Student Management System. 4. Weather Data Scraper & Analyzer. Personality: Passionate about technology, problem-solving, and eager to learn.`;
         const systemPrompt = `You are a friendly and professional AI assistant for Srinivas Kumar's portfolio. Your goal is to answer questions from visitors. Use ONLY the information provided in the following context. If a question is outside this context, politely state that you only have information about Srinivas's professional portfolio. CONTEXT: ${portfolioContext}`;
         
-        chatIcon.addEventListener('click', () => chatWidget.classList.toggle('active'));
+        chatIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            chatWidget.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!chatWidget.contains(e.target) && !chatIcon.contains(e.target)) {
+                chatWidget.classList.remove('active');
+            }
+        });
+
         chatSendBtn.addEventListener('click', sendMessage);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
 
