@@ -81,6 +81,35 @@ def chat_proxy():
     except Exception as e:
         print(f"Chat Proxy Error: {e}")
         return jsonify({"error": "An internal error occurred."}), 500
+        
+@app.route('/api/analyze_population', methods=['POST'])
+def analyze_population():
+    try:
+        data = request.get_json()
+        year = data.get('year')
+        population = data.get('population')
+
+        if not year or not population:
+            return jsonify({'error': 'Year and population are required.'}), 400
+
+        prompt = f"Act as a socio-economic analyst. Based on current trends for India, provide a brief, insightful analysis (approx. 2-3 sentences) on the potential implications of India having a population of {population:,} by the year {year}. Touch upon one or two aspects like economic growth, resource management, or infrastructure."
+
+        payload = {
+            "contents": [{
+                "parts": [{"text": prompt}]
+            }],
+            "tools": [{"google_search": {}}]
+        }
+        
+        api_url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={GEMINI_API_KEY}'
+        
+        response = requests.post(api_url, json=payload)
+        response.raise_for_status()
+        
+        return jsonify(response.json())
+    except Exception as e:
+        print(f"Analysis API Error: {e}")
+        return jsonify({"error": "An internal error occurred during analysis."}), 500
 
 @app.route('/contact', methods=['POST'])
 def handle_contact():
