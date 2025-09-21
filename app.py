@@ -7,6 +7,10 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import firebase_admin
 from firebase_admin import credentials, firestore
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +27,11 @@ except Exception as e:
     print("Could not connect to the database. Please ensure 'serviceAccountKey.json' is present and correct.")
 
 # --- API Key ---
-GEMINI_API_KEY = 'AIzaSyAxUSJ6427XJqUyLwxytskuynVmQmjH-Q4'
+# Securely load the API key from the environment variable
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
+if not GEMINI_API_KEY:
+    print("Error: GEMINI_API_KEY not found. Make sure it's set in your .env file.")
 
 # --- Model Loading ---
 model_path = os.path.join(os.path.dirname(__file__), 'population.pickle3')

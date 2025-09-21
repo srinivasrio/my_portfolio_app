@@ -1,0 +1,14 @@
+Ignore the virtual environment folder, which is for local development only.
+venv/
+
+Ignore Python cache files that are generated automatically.
+pycache/
+
+Ignore sensitive credential files. These should be set as environment
+variables on the deployment server, not uploaded.
+serviceAccountKey.json
+.env
+
+Ignore IDE/editor-specific folders
+.vscode/
+.idea/
