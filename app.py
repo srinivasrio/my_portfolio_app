@@ -17,6 +17,7 @@ CORS(app)
 
 # --- Firebase Admin SDK Initialization ---
 try:
+    # Ensure the service account key file is in the root of your project
     cred = credentials.Certificate("serviceAccountKey.json")
     firebase_admin.initialize_app(cred)
     db = firestore.client()
@@ -53,6 +54,11 @@ def home():
 @app.route('/predictor')
 def predictor():
     return render_template('population_predictor.html')
+
+@app.route('/freelancing')
+def freelancing():
+    return render_template('freelancing.html')
+
 
 # --- API Routes ---
 @app.route('/population_india', methods=['POST'])
@@ -102,12 +108,7 @@ def analyze_population():
 
         prompt = f"Act as a socio-economic analyst. Based on current trends for India, provide a brief, insightful analysis (approx. 2-3 sentences) on the potential implications of India having a population of {population:,} by the year {year}. Touch upon one or two aspects like economic growth, resource management, or infrastructure."
 
-        payload = {
-            "contents": [{
-                "parts": [{"text": prompt}]
-            }],
-            "tools": [{"google_search": {}}]
-        }
+        payload = { "contents": [{ "parts": [{"text": prompt}] }], "tools": [{"google_search": {}}] }
         
         api_url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={GEMINI_API_KEY}'
         
@@ -145,6 +146,36 @@ def handle_contact():
         return jsonify({'success': 'Your message has been sent successfully!'})
     except Exception as e:
         print(f"Contact form error: {e}")
+        return jsonify({'error': 'An error occurred on the server.'}), 500
+
+@app.route('/freelance_request', methods=['POST'])
+def handle_freelance_request():
+    if not db:
+         return jsonify({'error': 'Database is not configured correctly.'}), 500
+    try:
+        data = request.get_json()
+        required_fields = ['name', 'mobile', 'email', 'work_type', 'deadline', 'client_type']
+        if not all(field in data and data[field] for field in required_fields):
+            return jsonify({'error': 'Please fill out all required fields.'}), 400
+
+        # Save to Firestore in a new collection
+        doc_ref = db.collection('freelance_requests').document()
+        doc_ref.set({
+            'name': data.get('name'),
+            'mobile': data.get('mobile'),
+            'email': data.get('email'),
+            'work_type': data.get('work_type'),
+            'deadline': data.get('deadline'),
+            'client_type': data.get('client_type'),
+            'other_client_info': data.get('other_client_info', None), # Handle optional field
+            'timestamp': firestore.SERVER_TIMESTAMP
+        })
+        
+        print("--- New Freelance Request Saved to Firestore ---")
+        
+        return jsonify({'success': 'Your quote request has been submitted! I will get back to you shortly.'})
+    except Exception as e:
+        print(f"Freelance form error: {e}")
         return jsonify({'error': 'An error occurred on the server.'}), 500
 
 if __name__ == '__main__':

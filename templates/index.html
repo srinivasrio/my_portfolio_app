@@ -211,6 +211,7 @@
                     <a href="#skills" class="nav-link text-md adaptive-text">Skills</a>
                     <a href="#projects" class="nav-link text-md adaptive-text">Projects</a>
                     <a href="#certifications" class="nav-link text-md adaptive-text">Certifications</a>
+                    <a href="#freelancing" class="nav-link text-md adaptive-text">Freelancing</a>
                     <a href="#contact" class="nav-link text-md adaptive-text">Contact</a>
                     <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="ml-4 px-5 py-2 rounded-full border-2 border-purple-400 text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition">Resume</a>
                 </nav>
@@ -230,6 +231,7 @@
              <a href="#skills" class="block text-center py-3 text-lg nav-link adaptive-text">Skills</a>
              <a href="#projects" class="block text-center py-3 text-lg nav-link adaptive-text">Projects</a>
              <a href="#certifications" class="block text-center py-3 text-lg nav-link adaptive-text">Certifications</a>
+             <a href="#freelancing" class="block text-center py-3 text-lg nav-link adaptive-text">Freelancing</a>
              <a href="#contact" class="block text-center py-3 text-lg nav-link adaptive-text">Contact</a>
              <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="block text-center py-3 text-lg text-purple-400 font-semibold">Download Resume</a>
         </div>
@@ -242,7 +244,7 @@
                     Hi, I'm <span class="gradient-text">Srinivas Kumar</span>
                 </h1>
                 <p class="text-xl md:text-2xl max-w-3xl mx-auto">
-                    A passionate MCA student from Nellore, specializing in Python and Data Science. Welcome to my creative space.
+                    A passionate MCA student and Freelancer from Nellore, specializing in Python and Data Science. Welcome to my creative space.
                 </p>
                 <div class="mt-12">
                      <a href="#projects" class="inline-block px-8 py-4 rounded-full font-bold text-lg glow-button glass-ui adaptive-text">View My Work</a>
@@ -323,7 +325,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section id="experience" class="reveal">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-12">My <span class="gradient-text">Experience</span></h2>
@@ -334,9 +336,9 @@
                                 <svg class="w-24 h-24 adaptive-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5c0-1.02.83-1.85 1.85-1.85h1.5M13.5 21h-3.375c-1.02 0-1.85-.83-1.85-1.85V13.5M9.375 13.5h7.5M9.375 13.5L4.5 18.375M9.375 13.5L14.625 8.25m4.125 5.25c0-2.89-2.36-5.25-5.25-5.25S8.25 9.61 8.25 12.5m8.25 0c0 2.89-2.36 5.25-5.25 5.25s-5.25-2.36-5.25-5.25" /></svg>
                             </div>
                             <div class="flex-grow">
-                                <h3 class="text-2xl font-bold mb-1 adaptive-text">Data Science Intern</h3>
-                                <p class="text-lg font-semibold adaptive-text">Sample Tech Inc.</p>
-                                <p class="text-sm opacity-80 mb-4">June 2025 - August 2025</p>
+                                <h3 class="text-2xl font-bold mb-1 adaptive-text">Data Science Training</h3>
+                                <p class="text-lg font-semibold adaptive-text">Besant Technologies.</p>
+                                <p class="text-sm opacity-80 mb-4">Jan 2023 - July 2023</p>
                                 <p class="text-left mb-6 opacity-90">Contributed to the data analysis pipeline by cleaning and processing large datasets using Pandas. Developed and tested machine learning models with Scikit-learn to identify user behavior patterns. Created data visualizations in Matplotlib to present key findings to the team.</p>
                                 <a href="{{ url_for('static', filename='images/certs/internship_cert.png') }}" class="cert-link glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Certificate</a>
                             </div>
@@ -403,7 +405,7 @@
                         <h3 class="text-lg font-semibold adaptive-text">Google Data Studio</h3>
                     </div>
                      <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
-                        <img src="{{ url_for('static', filename='svgs/web_scrapping.svg') }}" alt="Web Scraping Logo" class="w-16 h-16 mb-2 object-contain">
+                        <img src="{{ url_for('static', filename='svgs/web.svg') }}" alt="Web Scraping Logo" class="w-16 h-16 mb-2 object-contain">
                         <h3 class="text-lg font-semibold adaptive-text">Web Scraping</h3>
                     </div>
                 </div>
@@ -440,14 +442,78 @@
             </div>
         </section>
 
+        <section id="freelancing" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12">Freelancing <span class="gradient-text">Services</span></h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Service Cards -->
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Websites</h3>
+                        <p class="opacity-80">Static, Dynamic, Portfolios, E-commerce, and any custom website solutions with database connectivity.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Analysis</h3>
+                        <p class="opacity-80">Insightful analysis of sales data, HR employee data, and other business metrics to drive decisions.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Machine Learning Models</h3>
+                        <p class="opacity-80">Developing predictive models to forecast future trends, customer behavior, and other key indicators.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">AI Chatbots</h3>
+                        <p class="opacity-80">Intelligent chatbots to automate customer service, answer questions, and enhance user engagement.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Maintenance</h3>
+                        <p class="opacity-80">Organizing and maintaining your company data efficiently in Excel, SQL, or other database systems.</p>
+                    </div>
+                     <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Mobile Apps (Android)</h3>
+                        <p class="opacity-80">Custom Android applications tailored to your business or personal needs.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-3xl font-bold mb-8 gradient-text">Request a Quote</h3>
+                <form id="freelance-form" class="max-w-xl mx-auto space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                        <input type="tel" name="mobile" placeholder="Mobile Number" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    </div>
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <select name="work_type" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                        <option value="" disabled selected>Select Service Type...</option>
+                        <option value="Website Development">Website Development</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning Model">Machine Learning Model</option>
+                        <option value="AI Chatbot">AI Chatbot</option>
+                        <option value="Data Maintenance">Data Maintenance</option>
+                        <option value="Mobile App (Android)">Mobile App (Android)</option>
+                    </select>
+                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="deadline" placeholder="Project Deadline" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <div class="text-left">
+                        <label class="block font-semibold mb-2">I am a...</label>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Student" class="mr-2"> Student</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Employee" class="mr-2"> Employee</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Business" class="mr-2"> For Business</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Other" class="mr-2"> Other</label>
+                        </div>
+                    </div>
+                    <input type="text" id="other_client_info" name="other_client_info" placeholder="Please specify" class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text hidden">
+                    <button type="submit" id="submit-quote-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Submit Request</button>
+                </form>
+                <div id="freelance-form-status" class="mt-6 text-lg"></div>
+            </div>
+        </section>
+
         <section id="contact" class="reveal">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contact <span class="gradient-text">Me</span></h2>
-                <p class="text-lg mb-8 max-w-2xl mx-auto">I'm available for freelance work and open to new opportunities. Let's build something amazing together.</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">General <span class="gradient-text">Contact</span></h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">Have a general question or just want to say hello? Feel free to reach out using the form below.</p>
                 <form id="contact-form" class="max-w-xl mx-auto space-y-6">
-                    <input type="text" id="name" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <input type="email" id="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <textarea id="message" name="message" rows="5" placeholder="Your Message" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <textarea name="message" rows="5" placeholder="Your Message" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
                     <button type="submit" id="submit-contact-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Send Message</button>
                 </form>
                 <div id="form-status" class="mt-6 text-lg"></div>
@@ -577,6 +643,8 @@
         const modalContent = document.getElementById('modal-content');
         const contactForm = document.getElementById('contact-form');
         const formStatus = document.getElementById('form-status');
+        const freelanceForm = document.getElementById('freelance-form');
+        const freelanceFormStatus = document.getElementById('freelance-form-status');
         const lightbox = document.getElementById('lightbox-overlay');
         const lightboxImg = document.getElementById('lightbox-img');
         const chatIcon = document.getElementById('chat-icon');
@@ -763,6 +831,50 @@
             }
         });
         
+        freelanceForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-quote-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(freelanceForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                const response = await fetch('/freelance_request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if(response.ok) {
+                    freelanceFormStatus.textContent = result.success;
+                    freelanceFormStatus.className = 'mt-6 text-lg text-green-400';
+                    freelanceForm.reset();
+                } else {
+                    throw new Error(result.error || 'Something went wrong.');
+                }
+            } catch (error) {
+                freelanceFormStatus.textContent = `Error: ${error.message}`;
+                freelanceFormStatus.className = 'mt-6 text-lg text-red-400';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Request';
+            }
+        });
+        
+        document.querySelectorAll('input[name="client_type"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const otherInfo = document.getElementById('other_client_info');
+                if(e.target.value === 'Other') {
+                    otherInfo.classList.remove('hidden');
+                } else {
+                    otherInfo.classList.add('hidden');
+                }
+            })
+        });
+
+
         document.body.addEventListener('click', e => {
             if (e.target.closest('.cert-link')) {
                 e.preventDefault();
@@ -835,7 +947,7 @@
         });
         
         document.addEventListener('click', (e) => {
-            if (!chatWidget.contains(e.target) && !chatIcon.contains(e.target)) {
+            if (!chatWidget.contains(e.target) && !chatIcon.contains(e.target) && !e.target.closest('#chat-container')) {
                 chatWidget.classList.remove('active');
             }
         });
