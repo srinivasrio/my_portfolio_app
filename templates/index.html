@@ -117,12 +117,20 @@
         .glow-button:hover:not(:disabled) { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); border-color: rgba(192, 132, 252, 0.8); transform: scale(1.05); }
         .glow-button:disabled { cursor: not-allowed; opacity: 0.7; }
 
-        .social-icon { transition: transform 0.3s ease, color 0.3s ease; }
-        .social-icon:hover { transform: scale(1.2); }
-        .linkedin-icon:hover { color: #0A66C2; }
-        .github-icon:hover { color: #e0e0e0; }
-        .mail-icon:hover { color: #D44638; }
-        .whatsapp-icon:hover { color: #25D366; }
+        .social-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* scale only on hover */
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* default colors */
+.linkedin-icon { color: #0A66C2; }
+.github-icon { color: #020202; }
+.mail-icon { color: #D44638; }
+.whatsapp-icon { color: #25D366; }
 
         .adaptive-text { color: var(--text-color-dark); }
         html.light .adaptive-text { color: var(--text-color-light); }
@@ -245,7 +253,13 @@
                     A passionate MCA student and Freelancer from Nellore, specializing in Python and Data Science. Welcome to my creative space.
                 </p>
                 <div class="mt-12">
-                     <a href="#projects" class="inline-block px-8 py-4 rounded-full font-bold text-lg glow-button glass-ui adaptive-text">View My Work</a>
+                  <a href="#projects" 
+                     class="inline-block px-8 py-4 rounded-full font-bold text-lg 
+                     text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                     shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
+                     hover:scale-105 focus:ring-2 focus:ring-purple-300">
+                    View My Work
+                 </a>
                 </div>
             </div>
         </section>
@@ -440,14 +454,81 @@
             </div>
         </section>
 
+        <section id="freelancing" class="reveal">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12">Freelancing <span class="gradient-text">Services</span></h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Service Cards -->
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Websites</h3>
+                        <p class="opacity-80">Static, Dynamic, Portfolios, E-commerce, and any custom website solutions with database connectivity.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Analysis</h3>
+                        <p class="opacity-80">Insightful analysis of sales data, HR employee data, and other business metrics to drive decisions.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Machine Learning Models</h3>
+                        <p class="opacity-80">Developing predictive models to forecast future trends, customer behavior, and other key indicators.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">AI Chatbots</h3>
+                        <p class="opacity-80">Intelligent chatbots to automate customer service, answer questions, and enhance user engagement.</p>
+                    </div>
+                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Maintenance</h3>
+                        <p class="opacity-80">Organizing and maintaining your company data efficiently in Excel, SQL, or other database systems.</p>
+                    </div>
+                     <div class="glass-ui glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-xl font-bold mb-2 adaptive-text">Mobile Apps (Android)</h3>
+                        <p class="opacity-80">Custom Android applications tailored to your business or personal needs.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-3xl font-bold mb-8 gradient-text">Request a Quote</h3>
+                <form id="freelance-form" class="max-w-xl mx-auto space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                        <input type="tel" name="mobile" placeholder="Mobile Number" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    </div>
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <select name="work_type" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                        <option value="" disabled selected>Select Service Type...</option>
+                        <option value="Website Development">Website Development</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning Model">Machine Learning Model</option>
+                        <option value="AI Chatbot">AI Chatbot</option>
+                        <option value="Data Maintenance">Data Maintenance</option>
+                        <option value="Mobile App (Android)">Mobile App (Android)</option>
+                    </select>
+                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="deadline" placeholder="Project Deadline" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <div class="text-left">
+                        <label class="block font-semibold mb-2">I am a...</label>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Student" class="mr-2"> Student</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Employee" class="mr-2"> Employee</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Business" class="mr-2"> For Business</label>
+                            <label class="flex items-center"><input type="radio" name="client_type" value="Other" class="mr-2"> Other</label>
+                        </div>
+                    </div>
+                    <input type="text" id="other_client_info" name="other_client_info" placeholder="Please specify" class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text hidden">
+                    <button type="submit" id="submit-quote-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Submit Request</button>
+                </form>
+                <div id="freelance-form-status" class="mt-6 text-lg"></div>
+            </div>
+        </section>
+
         <section id="contact" class="reveal">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contact <span class="gradient-text">Me</span></h2>
-                <p class="text-lg mb-8 max-w-2xl mx-auto">I'm available for freelance work and open to new opportunities. Let's build something amazing together.</p>
-                <div class="space-x-4">
-                    <a href="mailto:srinivasrio06@gmail.com" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Get In Touch</a>
-                    <a href="/freelancing" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Work With Me</a>
-                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">General <span class="gradient-text">Contact</span></h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">Have a general question or just want to say hello? Feel free to reach out using the form below.</p>
+                <form id="contact-form" class="max-w-xl mx-auto space-y-6">
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                    <textarea name="message" rows="5" placeholder="Your Message" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
+                    <button type="submit" id="submit-contact-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Send Message</button>
+                </form>
+                <div id="form-status" class="mt-6 text-lg"></div>
             </div>
         </section>
     </main>
@@ -461,9 +542,14 @@
                  <a href="https://wa.me/8247005501" target="_blank" class="social-icon whatsapp-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.11 4.9C17.22 3 14.67 2 12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.32 4.95L2 22l5.05-1.32c1.5.86 3.17 1.32 4.95 1.32h.01c5.52 0 10-4.48 10-10c0-2.67-1-5.22-2.89-7.1zM12 20.37c-2.13 0-4.14-.59-5.89-1.66L4.89 19.3l.63-1.25c-1.06-1.75-1.71-3.76-1.71-5.94c0-4.6 3.73-8.33 8.33-8.33c2.25 0 4.35.88 5.89 2.42c1.54 1.54 2.42 3.64 2.42 5.89c0 4.6-3.73 8.33-8.33 8.33zM16.56 12.82c-.22-.11-1.3-.64-1.5-.72c-.2-.08-.34-.11-.49.11c-.15.22-.57.72-.69.86c-.13.15-.25.17-.47.06c-.22-.11-1-.37-1.89-1.18c-.7-.63-1.17-1.41-1.3-1.66c-.12-.25-.01-.39.1-.5c.1-.11.23-.29.34-.43c.12-.15.16-.25.24-.42c.08-.17.04-.31-.02-.43c-.06-.12-.49-1.18-.67-1.62c-.18-.43-.37-.37-.51-.37c-.13 0-.28 0-.42 0c-.15 0-.39.06-.59.3c-.2.25-.77.75-.77 1.82c0 1.06.79 2.11.9 2.27c.11.16 1.56 2.51 3.78 3.35c.55.21 1 .33 1.35.42c.5.12.95.1.13.06c.4-.04 1.3-.53 1.48-1.05c.19-.52.19-1 .13-1.11c-.06-.11-.2-.17-.41-.28z"/></svg></a>
             </div>
             <div class="mt-4">
-                <button id="report-bug-btn" class="text-sm opacity-70 hover:opacity-100 transition hover:text-purple-400">Report a Bug</button>
+                <button id="report-bug-btn" 
+  class="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+         rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
+         hover:scale-105 focus:ring-2 focus:ring-purple-300">
+Report a Bug
+</button>
             </div>
-            <p class="mt-4">&copy; 2025 Srinivas Kumar. <br> All Rights Reserved.</p>
+            <p class="mt-4">&copy; 2025 Srinivas Kumar. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -827,7 +913,6 @@
             })
         });
 
-
         document.body.addEventListener('click', e => {
             if (e.target.closest('.cert-link')) {
                 e.preventDefault();
@@ -1019,4 +1104,3 @@
 </script>
 </body>
 </html>
-
