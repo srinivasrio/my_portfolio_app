@@ -58,9 +58,6 @@ def home():
 def predictor():
     return render_template("population_predictor.html")
 
-@app.route("/freelancing")
-def freelancing():
-    return render_template("freelancing.html")
 
 
 # --- API Routes ---
