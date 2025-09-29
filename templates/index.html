@@ -117,20 +117,12 @@
         .glow-button:hover:not(:disabled) { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); border-color: rgba(192, 132, 252, 0.8); transform: scale(1.05); }
         .glow-button:disabled { cursor: not-allowed; opacity: 0.7; }
 
-        .social-icon {
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-/* scale only on hover */
-.social-icon:hover {
-  transform: scale(1.2);
-}
-
-/* default colors */
-.linkedin-icon { color: #0A66C2; }
-.github-icon { color: #020202; }
-.mail-icon { color: #D44638; }
-.whatsapp-icon { color: #25D366; }
+        .social-icon { transition: transform 0.3s ease, color 0.3s ease; }
+        .social-icon:hover { transform: scale(1.2); }
+        .linkedin-icon:hover { color: #0A66C2; }
+        .github-icon:hover { color: #e0e0e0; }
+        .mail-icon:hover { color: #D44638; }
+        .whatsapp-icon:hover { color: #25D366; }
 
         .adaptive-text { color: var(--text-color-dark); }
         html.light .adaptive-text { color: var(--text-color-light); }
@@ -253,13 +245,7 @@
                     A passionate MCA student and Freelancer from Nellore, specializing in Python and Data Science. Welcome to my creative space.
                 </p>
                 <div class="mt-12">
-                  <a href="#projects" 
-                     class="inline-block px-8 py-4 rounded-full font-bold text-lg 
-                     text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
-                     shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
-                     hover:scale-105 focus:ring-2 focus:ring-purple-300">
-                    View My Work
-                 </a>
+                     <a href="#projects" class="inline-block px-8 py-4 rounded-full font-bold text-lg glow-button glass-ui adaptive-text">View My Work</a>
                 </div>
             </div>
         </section>
@@ -542,12 +528,7 @@
                  <a href="https://wa.me/8247005501" target="_blank" class="social-icon whatsapp-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.11 4.9C17.22 3 14.67 2 12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.32 4.95L2 22l5.05-1.32c1.5.86 3.17 1.32 4.95 1.32h.01c5.52 0 10-4.48 10-10c0-2.67-1-5.22-2.89-7.1zM12 20.37c-2.13 0-4.14-.59-5.89-1.66L4.89 19.3l.63-1.25c-1.06-1.75-1.71-3.76-1.71-5.94c0-4.6 3.73-8.33 8.33-8.33c2.25 0 4.35.88 5.89 2.42c1.54 1.54 2.42 3.64 2.42 5.89c0 4.6-3.73 8.33-8.33 8.33zM16.56 12.82c-.22-.11-1.3-.64-1.5-.72c-.2-.08-.34-.11-.49.11c-.15.22-.57.72-.69.86c-.13.15-.25.17-.47.06c-.22-.11-1-.37-1.89-1.18c-.7-.63-1.17-1.41-1.3-1.66c-.12-.25-.01-.39.1-.5c.1-.11.23-.29.34-.43c.12-.15.16-.25.24-.42c.08-.17.04-.31-.02-.43c-.06-.12-.49-1.18-.67-1.62c-.18-.43-.37-.37-.51-.37c-.13 0-.28 0-.42 0c-.15 0-.39.06-.59.3c-.2.25-.77.75-.77 1.82c0 1.06.79 2.11.9 2.27c.11.16 1.56 2.51 3.78 3.35c.55.21 1 .33 1.35.42c.5.12.95.1.13.06c.4-.04 1.3-.53 1.48-1.05c.19-.52.19-1 .13-1.11c-.06-.11-.2-.17-.41-.28z"/></svg></a>
             </div>
             <div class="mt-4">
-                <button id="report-bug-btn" 
-  class="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
-         rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
-         hover:scale-105 focus:ring-2 focus:ring-purple-300">
-Report a Bug
-</button>
+                <button id="report-bug-btn" class="text-sm opacity-70 hover:opacity-100 transition hover:text-purple-400">Report a Bug</button>
             </div>
             <p class="mt-4">&copy; 2025 Srinivas Kumar. All Rights Reserved.</p>
         </div>
@@ -913,6 +894,7 @@ Report a Bug
             })
         });
 
+
         document.body.addEventListener('click', e => {
             if (e.target.closest('.cert-link')) {
                 e.preventDefault();
@@ -1104,3 +1086,4 @@ Report a Bug
 </script>
 </body>
 </html>
+
