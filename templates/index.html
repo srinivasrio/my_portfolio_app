@@ -117,12 +117,20 @@
         .glow-button:hover:not(:disabled) { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); border-color: rgba(192, 132, 252, 0.8); transform: scale(1.05); }
         .glow-button:disabled { cursor: not-allowed; opacity: 0.7; }
 
-        .social-icon { transition: transform 0.3s ease, color 0.3s ease; }
-        .social-icon:hover { transform: scale(1.2); }
-        .linkedin-icon:hover { color: #0A66C2; }
-        .github-icon:hover { color: #e0e0e0; }
-        .mail-icon:hover { color: #D44638; }
-        .whatsapp-icon:hover { color: #25D366; }
+        .social-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* scale only on hover */
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* default colors */
+.linkedin-icon { color: #0A66C2; }
+.github-icon { color: #020202; }
+.mail-icon { color: #D44638; }
+.whatsapp-icon { color: #25D366; }
 
         .adaptive-text { color: var(--text-color-dark); }
         html.light .adaptive-text { color: var(--text-color-light); }
@@ -149,10 +157,10 @@
         .filter-btn.active { background: linear-gradient(90deg, #818cf8, #c084fc); color: white; }
         html.light .filter-btn.active { color: #18181b; }
         
-        .modal-overlay, #lightbox-overlay, #curriculum-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
-        .modal-overlay.active, #lightbox-overlay.active, #curriculum-modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-overlay, #lightbox-overlay, #curriculum-modal-overlay, #bug-report-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+        .modal-overlay.active, #lightbox-overlay.active, #curriculum-modal-overlay.active, #bug-report-modal-overlay.active { opacity: 1; pointer-events: all; }
         .modal-container { width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; transform: scale(0.95); transition: transform 0.3s ease; position: relative; }
-        .modal-overlay.active .modal-container, #curriculum-modal-overlay.active .modal-container { transform: scale(1); }
+        .modal-overlay.active .modal-container, #curriculum-modal-overlay.active .modal-container, #bug-report-modal-overlay.active .modal-container { transform: scale(1); }
         .modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; z-index: 10; }
         #lightbox-img { max-height: 90vh; max-width: 90vw; transform: scale(0.95); transition: transform 0.3s ease; }
         #lightbox-overlay.active #lightbox-img { transform: scale(1); }
@@ -211,9 +219,8 @@
                     <a href="#skills" class="nav-link text-md adaptive-text">Skills</a>
                     <a href="#projects" class="nav-link text-md adaptive-text">Projects</a>
                     <a href="#certifications" class="nav-link text-md adaptive-text">Certifications</a>
-                    <a href="#freelancing" class="nav-link text-md adaptive-text">Freelancing</a>
+                    <a href="/freelancing" class="nav-link text-md adaptive-text">Freelancing</a>
                     <a href="#contact" class="nav-link text-md adaptive-text">Contact</a>
-                    <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="ml-4 px-5 py-2 rounded-full border-2 border-purple-400 text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition">Resume</a>
                 </nav>
                 <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center glass-ui focus:outline-none">
                     <svg id="theme-icon-light" class="w-6 h-6 adaptive-text hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -231,9 +238,8 @@
              <a href="#skills" class="block text-center py-3 text-lg nav-link adaptive-text">Skills</a>
              <a href="#projects" class="block text-center py-3 text-lg nav-link adaptive-text">Projects</a>
              <a href="#certifications" class="block text-center py-3 text-lg nav-link adaptive-text">Certifications</a>
-             <a href="#freelancing" class="block text-center py-3 text-lg nav-link adaptive-text">Freelancing</a>
+             <a href="/freelancing" class="block text-center py-3 text-lg nav-link adaptive-text">Freelancing</a>
              <a href="#contact" class="block text-center py-3 text-lg nav-link adaptive-text">Contact</a>
-             <a href="{{ url_for('static', filename='resume.pdf') }}" download="Srinivas_Kumar_Resume.pdf" class="block text-center py-3 text-lg text-purple-400 font-semibold">Download Resume</a>
         </div>
     </header>
 
@@ -247,7 +253,13 @@
                     A passionate MCA student and Freelancer from Nellore, specializing in Python and Data Science. Welcome to my creative space.
                 </p>
                 <div class="mt-12">
-                     <a href="#projects" class="inline-block px-8 py-4 rounded-full font-bold text-lg glow-button glass-ui adaptive-text">View My Work</a>
+                  <a href="#projects" 
+                     class="inline-block px-8 py-4 rounded-full font-bold text-lg 
+                     text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                     shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
+                     hover:scale-105 focus:ring-2 focus:ring-purple-300">
+                    View My Work
+                 </a>
                 </div>
             </div>
         </section>
@@ -333,14 +345,14 @@
                     <div class="w-full max-w-2xl reveal">
                         <div class="glass-ui glass-card p-8 flex flex-col md:flex-row items-center text-center md:text-left gap-8 rounded-2xl h-full">
                             <div class="flex-shrink-0">
-                                <svg class="w-24 h-24 adaptive-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5c0-1.02.83-1.85 1.85-1.85h1.5M13.5 21h-3.375c-1.02 0-1.85-.83-1.85-1.85V13.5M9.375 13.5h7.5M9.375 13.5L4.5 18.375M9.375 13.5L14.625 8.25m4.125 5.25c0-2.89-2.36-5.25-5.25-5.25S8.25 9.61 8.25 12.5m8.25 0c0 2.89-2.36 5.25-5.25 5.25s-5.25-2.36-5.25-5.25" /></svg>
+                                <img src="{{ url_for('static', filename='images/besant_logo.png') }}" alt="Besant Technologies Logo" class="mx-auto mb-4 h-16 w-16 object-contain rounded-full">
                             </div>
                             <div class="flex-grow">
-                                <h3 class="text-2xl font-bold mb-1 adaptive-text">Data Science Training</h3>
-                                <p class="text-lg font-semibold adaptive-text">Besant Technologies.</p>
-                                <p class="text-sm opacity-80 mb-4">Jan 2023 - July 2023</p>
+                                <h3 class="text-2xl font-bold mb-1 adaptive-text">Data Science Intern</h3>
+                                <p class="text-lg font-semibold adaptive-text">Besant Technologies</p>
+                                <p class="text-sm opacity-80 mb-4">June 2025 - August 2025</p>
                                 <p class="text-left mb-6 opacity-90">Contributed to the data analysis pipeline by cleaning and processing large datasets using Pandas. Developed and tested machine learning models with Scikit-learn to identify user behavior patterns. Created data visualizations in Matplotlib to present key findings to the team.</p>
-                                <a href="{{ url_for('static', filename='images/certs/data_science_master_cert.png') }}" class="cert-link glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Certificate</a>
+                                <a href="{{ url_for('static', filename='images/certs/internship_cert.png') }}" class="cert-link glow-button glass-ui adaptive-text px-4 py-2 rounded-full text-sm">View Certificate</a>
                             </div>
                         </div>
                     </div>
@@ -405,7 +417,7 @@
                         <h3 class="text-lg font-semibold adaptive-text">Google Data Studio</h3>
                     </div>
                      <div class="glass-ui glass-card p-4 flex flex-col items-center justify-center aspect-square rounded-2xl reveal">
-                        <img src="{{ url_for('static', filename='svgs/web.svg') }}" alt="Web Scraping Logo" class="w-16 h-16 mb-2 object-contain">
+                        <img src="{{ url_for('static', filename='svgs/web_scraping.svg') }}" alt="Web Scraping Logo" class="w-16 h-16 mb-2 object-contain">
                         <h3 class="text-lg font-semibold adaptive-text">Web Scraping</h3>
                     </div>
                 </div>
@@ -523,13 +535,21 @@
     
     <footer class="py-8 reveal">
         <div class="container mx-auto px-4 text-center text-gray-400">
-            <div class="flex justify-center space-x-6 mb-4">
+            <div class="flex justify-center items-center space-x-6 mb-4">
                  <a href="https://www.linkedin.com/in/srinivas-kumar-95316116b/" target="_blank" class="social-icon linkedin-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
                  <a href="https://github.com/srinivasrio" target="_blank" class="social-icon github-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.577.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"/></svg></a>
                  <a href="mailto:srinivasrio06@gmail.com" class="social-icon mail-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M2.003 5.884L10 11.882l7.997-5.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 6-8-6V18a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg></a>
                  <a href="https://wa.me/8247005501" target="_blank" class="social-icon whatsapp-icon"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.11 4.9C17.22 3 14.67 2 12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.32 4.95L2 22l5.05-1.32c1.5.86 3.17 1.32 4.95 1.32h.01c5.52 0 10-4.48 10-10c0-2.67-1-5.22-2.89-7.1zM12 20.37c-2.13 0-4.14-.59-5.89-1.66L4.89 19.3l.63-1.25c-1.06-1.75-1.71-3.76-1.71-5.94c0-4.6 3.73-8.33 8.33-8.33c2.25 0 4.35.88 5.89 2.42c1.54 1.54 2.42 3.64 2.42 5.89c0 4.6-3.73 8.33-8.33 8.33zM16.56 12.82c-.22-.11-1.3-.64-1.5-.72c-.2-.08-.34-.11-.49.11c-.15.22-.57.72-.69.86c-.13.15-.25.17-.47.06c-.22-.11-1-.37-1.89-1.18c-.7-.63-1.17-1.41-1.3-1.66c-.12-.25-.01-.39.1-.5c.1-.11.23-.29.34-.43c.12-.15.16-.25.24-.42c.08-.17.04-.31-.02-.43c-.06-.12-.49-1.18-.67-1.62c-.18-.43-.37-.37-.51-.37c-.13 0-.28 0-.42 0c-.15 0-.39.06-.59.3c-.2.25-.77.75-.77 1.82c0 1.06.79 2.11.9 2.27c.11.16 1.56 2.51 3.78 3.35c.55.21 1 .33 1.35.42c.5.12.95.1.13.06c.4-.04 1.3-.53 1.48-1.05c.19-.52.19-1 .13-1.11c-.06-.11-.2-.17-.41-.28z"/></svg></a>
             </div>
-            <p>&copy; 2025 Srinivas Kumar. All Rights Reserved.</p>
+            <div class="mt-4">
+                <button id="report-bug-btn" 
+  class="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+         rounded-full shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
+         hover:scale-105 focus:ring-2 focus:ring-purple-300">
+Report a Bug
+</button>
+            </div>
+            <p class="mt-4">&copy; 2025 Srinivas Kumar. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -547,6 +567,20 @@
         <div class="modal-container glass-ui rounded-2xl p-6 adaptive-text" style="max-width: 800px;">
             <button class="modal-close-btn">&times;</button>
             <div id="curriculum-modal-content"></div>
+        </div>
+    </div>
+    <div id="bug-report-modal-overlay" class="modal-overlay">
+        <div class="modal-container glass-ui rounded-2xl p-6">
+            <button class="modal-close-btn adaptive-text">&times;</button>
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Report a Bug or Issue</h2>
+            <form id="bug-report-form" class="space-y-4">
+                <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                <input type="tel" name="mobile" placeholder="Mobile Number" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
+                <textarea name="issue" rows="4" placeholder="Please describe the issue..." required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
+                <button type="submit" id="submit-bug-report-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Submit Report</button>
+            </form>
+            <div id="bug-report-form-status" class="mt-4 text-lg"></div>
         </div>
     </div>
     
@@ -654,6 +688,11 @@
         const chatSendBtn = document.getElementById('chat-send-btn');
         const curriculumModalOverlay = document.getElementById('curriculum-modal-overlay');
         const curriculumModalContent = document.getElementById('curriculum-modal-content');
+        const bugReportBtn = document.getElementById('report-bug-btn');
+        const bugReportModalOverlay = document.getElementById('bug-report-modal-overlay');
+        const bugReportForm = document.getElementById('bug-report-form');
+        const bugReportFormStatus = document.getElementById('bug-report-form-status');
+
         let chatHistory = [];
 
 
@@ -874,7 +913,6 @@
             })
         });
 
-
         document.body.addEventListener('click', e => {
             if (e.target.closest('.cert-link')) {
                 e.preventDefault();
@@ -935,6 +973,48 @@
 
                 curriculumModalContent.querySelectorAll('.sem-content').forEach(el => el.classList.add('hidden'));
                 curriculumModalContent.querySelector(`#sem-content-${semIndex}`).classList.remove('hidden');
+            }
+        });
+        
+        bugReportBtn.addEventListener('click', () => {
+            bugReportModalOverlay.classList.add('active');
+        });
+        
+        bugReportModalOverlay.addEventListener('click', e => {
+            if (e.target === bugReportModalOverlay || e.target.closest('.modal-close-btn')) {
+                bugReportModalOverlay.classList.remove('active');
+            }
+        });
+        
+        bugReportForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-bug-report-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = new FormData(bugReportForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                const response = await fetch('/report_bug', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if(response.ok) {
+                    bugReportFormStatus.textContent = result.success;
+                    bugReportFormStatus.className = 'mt-4 text-lg text-green-400';
+                    bugReportForm.reset();
+                } else {
+                    throw new Error(result.error || 'Something went wrong.');
+                }
+            } catch (error) {
+                bugReportFormStatus.textContent = `Error: ${error.message}`;
+                bugReportFormStatus.className = 'mt-4 text-lg text-red-400';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Report';
             }
         });
 
@@ -1024,4 +1104,3 @@
 </script>
 </body>
 </html>
-

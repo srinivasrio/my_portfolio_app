@@ -158,7 +158,6 @@ def handle_freelance_request():
         if not all(field in data and data[field] for field in required_fields):
             return jsonify({'error': 'Please fill out all required fields.'}), 400
 
-        # Save to Firestore in a new collection
         doc_ref = db.collection('freelance_requests').document()
         doc_ref.set({
             'name': data.get('name'),
@@ -167,7 +166,7 @@ def handle_freelance_request():
             'work_type': data.get('work_type'),
             'deadline': data.get('deadline'),
             'client_type': data.get('client_type'),
-            'other_client_info': data.get('other_client_info', None), # Handle optional field
+            'other_client_info': data.get('other_client_info', None),
             'timestamp': firestore.SERVER_TIMESTAMP
         })
         
@@ -176,6 +175,32 @@ def handle_freelance_request():
         return jsonify({'success': 'Your quote request has been submitted! I will get back to you shortly.'})
     except Exception as e:
         print(f"Freelance form error: {e}")
+        return jsonify({'error': 'An error occurred on the server.'}), 500
+
+@app.route('/report_bug', methods=['POST'])
+def handle_bug_report():
+    if not db:
+        return jsonify({'error': 'Database is not configured correctly.'}), 500
+    try:
+        data = request.get_json()
+        required_fields = ['name', 'email', 'mobile', 'issue']
+        if not all(field in data and data[field] for field in required_fields):
+            return jsonify({'error': 'Please fill out all required fields.'}), 400
+
+        doc_ref = db.collection('bug_reports').document()
+        doc_ref.set({
+            'name': data.get('name'),
+            'email': data.get('email'),
+            'mobile': data.get('mobile'),
+            'issue': data.get('issue'),
+            'timestamp': firestore.SERVER_TIMESTAMP
+        })
+        
+        print("--- New Bug Report Saved to Firestore ---")
+        
+        return jsonify({'success': 'Thank you for your feedback! The bug has been reported.'})
+    except Exception as e:
+        print(f"Bug report error: {e}")
         return jsonify({'error': 'An error occurred on the server.'}), 500
 
 if __name__ == '__main__':
