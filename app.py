@@ -1,6 +1,7 @@
 import os
 import json
 import pickle
+import pathlib
 import numpy as np
 import requests
 from flask import Flask, render_template, request, jsonify
@@ -12,9 +13,12 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# If keeping templates in repo root (not /templates), set template_folder='.'
-# Otherwise, move HTML files into a /templates folder and use default.
-app = Flask(__name__, template_folder='.')
+# Resolve absolute project directory to avoid TemplateNotFound on Render
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
+
+# If HTML files are at repo root, point template_folder to BASE_DIR.
+# If you later move them into /templates, change to app = Flask(__name__) and put files there.
+app = Flask(__name__, template_folder=str(BASE_DIR))
 CORS(app)
 
 # ---------- Firebase Admin SDK Initialization ----------
@@ -50,7 +54,7 @@ def download_model_if_needed():
     try:
         if not MODEL_URL:
             return
-        target = MODEL_PATH_ENV or os.path.join(os.path.dirname(__file__), "population.pickle4")
+        target = MODEL_PATH_ENV or str(BASE_DIR / "population.pickle4")
         if os.path.exists(target):
             return
         print(f"Downloading model from {MODEL_URL} ...")
@@ -70,16 +74,15 @@ def load_model_once():
     if MODEL is not None or MODEL_LOAD_ERR is not None:
         return
     try:
-        here = os.path.dirname(__file__)
         candidates = []
         if MODEL_PATH_ENV:
             candidates.append(MODEL_PATH_ENV)
         # Try your current name first, then common alternates
         candidates += [
-            os.path.join(here, "population.pickle4"),  # your new file
-            os.path.join(here, "population.pickle"),   # older/newer alt
-            os.path.join(here, "population.pickle3"),  # older alt
-            os.path.join(here, "population.pkl"),      # common alt
+            str(BASE_DIR / "population.pickle4"),  # your new file
+            str(BASE_DIR / "population.pickle"),   # older/newer alt
+            str(BASE_DIR / "population.pickle3"),  # older alt
+            str(BASE_DIR / "population.pkl"),      # common alt
         ]
 
         last_err = None
@@ -106,15 +109,17 @@ load_model_once()
 # ---------- Frontend Routes ----------
 @app.route("/")
 def home():
+    # index.html is expected in BASE_DIR (repo root) given template_folder str(BASE_DIR)
     return render_template("index.html")
 
 @app.route("/predictor")
 def predictor():
+    # population_predictor.html is expected in BASE_DIR
     return render_template("population_predictor.html")
 
 @app.route("/freelancing")
 def freelancing():
-    # If you don't have a freelancing.html yet, comment this route or add the file.
+    # If you don't have freelancing.html yet, comment this route or add the file to BASE_DIR.
     return render_template("freelancing.html")
 
 # ---------- API: ML Predictor ----------
