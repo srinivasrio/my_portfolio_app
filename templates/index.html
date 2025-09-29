@@ -440,81 +440,14 @@
             </div>
         </section>
 
-        <section id="freelancing" class="reveal">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12">Freelancing <span class="gradient-text">Services</span></h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    <!-- Service Cards -->
-                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">Websites</h3>
-                        <p class="opacity-80">Static, Dynamic, Portfolios, E-commerce, and any custom website solutions with database connectivity.</p>
-                    </div>
-                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Analysis</h3>
-                        <p class="opacity-80">Insightful analysis of sales data, HR employee data, and other business metrics to drive decisions.</p>
-                    </div>
-                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">Machine Learning Models</h3>
-                        <p class="opacity-80">Developing predictive models to forecast future trends, customer behavior, and other key indicators.</p>
-                    </div>
-                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">AI Chatbots</h3>
-                        <p class="opacity-80">Intelligent chatbots to automate customer service, answer questions, and enhance user engagement.</p>
-                    </div>
-                    <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">Data Maintenance</h3>
-                        <p class="opacity-80">Organizing and maintaining your company data efficiently in Excel, SQL, or other database systems.</p>
-                    </div>
-                     <div class="glass-ui glass-card p-6 rounded-2xl text-center">
-                        <h3 class="text-xl font-bold mb-2 adaptive-text">Mobile Apps (Android)</h3>
-                        <p class="opacity-80">Custom Android applications tailored to your business or personal needs.</p>
-                    </div>
-                </div>
-
-                <h3 class="text-3xl font-bold mb-8 gradient-text">Request a Quote</h3>
-                <form id="freelance-form" class="max-w-xl mx-auto space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                        <input type="tel" name="mobile" placeholder="Mobile Number" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    </div>
-                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <select name="work_type" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                        <option value="" disabled selected>Select Service Type...</option>
-                        <option value="Website Development">Website Development</option>
-                        <option value="Data Analysis">Data Analysis</option>
-                        <option value="Machine Learning Model">Machine Learning Model</option>
-                        <option value="AI Chatbot">AI Chatbot</option>
-                        <option value="Data Maintenance">Data Maintenance</option>
-                        <option value="Mobile App (Android)">Mobile App (Android)</option>
-                    </select>
-                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="deadline" placeholder="Project Deadline" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <div class="text-left">
-                        <label class="block font-semibold mb-2">I am a...</label>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex items-center"><input type="radio" name="client_type" value="Student" class="mr-2"> Student</label>
-                            <label class="flex items-center"><input type="radio" name="client_type" value="Employee" class="mr-2"> Employee</label>
-                            <label class="flex items-center"><input type="radio" name="client_type" value="Business" class="mr-2"> For Business</label>
-                            <label class="flex items-center"><input type="radio" name="client_type" value="Other" class="mr-2"> Other</label>
-                        </div>
-                    </div>
-                    <input type="text" id="other_client_info" name="other_client_info" placeholder="Please specify" class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text hidden">
-                    <button type="submit" id="submit-quote-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Submit Request</button>
-                </form>
-                <div id="freelance-form-status" class="mt-6 text-lg"></div>
-            </div>
-        </section>
-
         <section id="contact" class="reveal">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">General <span class="gradient-text">Contact</span></h2>
-                <p class="text-lg mb-8 max-w-2xl mx-auto">Have a general question or just want to say hello? Feel free to reach out using the form below.</p>
-                <form id="contact-form" class="max-w-xl mx-auto space-y-6">
-                    <input type="text" name="name" placeholder="Your Name" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <input type="email" name="email" placeholder="Your Email" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text">
-                    <textarea name="message" rows="5" placeholder="Your Message" required class="w-full text-lg px-6 py-3 rounded-lg border-2 border-transparent focus:border-purple-500 focus:outline-none transition glass-ui adaptive-text"></textarea>
-                    <button type="submit" id="submit-contact-btn" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Send Message</button>
-                </form>
-                <div id="form-status" class="mt-6 text-lg"></div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contact <span class="gradient-text">Me</span></h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">I'm available for freelance work and open to new opportunities. Let's build something amazing together.</p>
+                <div class="space-x-4">
+                    <a href="mailto:srinivasrio06@gmail.com" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Get In Touch</a>
+                    <a href="/freelancing" class="inline-block px-10 py-4 rounded-full font-bold text-xl glow-button glass-ui adaptive-text">Work With Me</a>
+                </div>
             </div>
         </section>
     </main>
