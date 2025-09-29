@@ -38,7 +38,7 @@ if not GEMINI_API_KEY:
     print("Error: GEMINI_API_KEY not found.")
 
 # --- Model Loading ---
-model_path = os.path.join(os.path.dirname(__file__), "population.pickle3")
+model_path = os.path.join(os.path.dirname(__file__), "population.pickle4")
 model = None
 try:
     with open(model_path, "rb") as file:
