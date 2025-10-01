@@ -91,12 +91,6 @@ Install the dependencies:
 
 pip install -r requirements.txt
 
-Set up your secret keys:
-
-Create a file named .env in the root folder and add your Gemini API key: GEMINI_API_KEY='YOUR_API_KEY'
-
-Place your Google Cloud service account key file in the root folder and name it serviceAccountKey.json.
-
 Run the application:
 
 python3 app.py
