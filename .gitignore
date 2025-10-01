@@ -12,3 +12,4 @@ serviceAccountKey.json
 Ignore IDE/editor-specific folders
 .vscode/
 .idea/
+.DS_Store
