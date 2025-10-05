@@ -1024,7 +1024,20 @@ Report a Bug
 
 
 `;
-        const systemPrompt = `Your name is Nivas. You are a friendly and professional AI assistant for Srinivas Kumar's portfolio. Your goal is to answer questions from visitors. Use ONLY the information provided in the following context. If a question is outside this context, politely state that you only have information about Srinivas's professional portfolio. CONTEXT: ${portfolioContext}`;
+        // THIS IS THE NEW, EXPANDED systemPrompt
+const systemPrompt = `You are a friendly and professional AI assistant for Srinivas Kumar's portfolio named Nivas. Your goal is to answer questions from visitors based ONLY on the provided CONTEXT.
+SPECIAL RULE: When a user asks to see a specific section (like "skills", "projects", "contact", "experience", "journey", "freelancing", or "report a bug"), you MUST append a special command to the end of your response. The command should be '@@SCROLL_TO_sectionId@@', where 'sectionId' is the ID of the HTML section.
+- If asked about "about" or "who is he", use @@SCROLL_TO_about@@.
+- If asked about "journey" or "education", use @@SCROLL_TO_journey@@.
+- If asked about "experience" or "internship", use @@SCROLL_TO_experience@@.
+- If asked about "skills", use @@SCROLL_TO_skills@@.
+- If asked about "projects" or "work", use @@SCROLL_TO_projects@@.
+- If asked about "freelancing" or "services", use @@SCROLL_TO_freelancing@@.
+- If asked about "contact" or "email", use @@SCROLL_TO_contact@@.
+- If asked to "report a bug", say "You can report a bug using the button in the footer. I'll take you there." and use @@SCROLL_TO_contact@@.
+Do not mention the command in your visible response. For example, if asked for skills, you would say "Here are his skills." and append @@SCROLL_TO_skills@@.
+
+CONTEXT: ${portfolioContext}`;
         
         chatIcon.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1056,12 +1069,35 @@ Report a Bug
                     systemInstruction: { parts: [{ text: systemPrompt }] }
                 };
                 const result = await callGemini(payload);
-                const modelText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (modelText) {
-                    addMessage(modelText, 'model');
-                    chatHistory.push({ role: "user", parts: [{ text: userText }] });
-                    chatHistory.push({ role: "model", parts: [{ text: modelText }] });
-                } else { addMessage("Sorry, I encountered an error. Please try again.", 'model'); }
+                // THIS IS THE NEW, CORRECTED CODE BLOCK
+const modelText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+if (modelText) {
+    let cleanText = modelText;
+
+    // Use a regular expression to find any SCROLL_TO command
+    const scrollCommand = modelText.match(/@@SCROLL_TO_(\w+)@@/);
+
+    if (scrollCommand && scrollCommand[1]) {
+        // Extract the section ID (e.g., "contact", "skills")
+        const sectionId = scrollCommand[1].toLowerCase();
+
+        // Remove the command from the text that will be displayed
+        cleanText = modelText.replace(scrollCommand[0], '').trim();
+
+        // Find the element and scroll to it
+        const targetElement = document.getElementById(sectionId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Add the cleaned message to the chat window
+    addMessage(cleanText, 'model');
+    chatHistory.push({ role: "user", parts: [{ text: userText }] });
+    chatHistory.push({ role: "model", parts: [{ text: cleanText }] });
+} else { 
+    addMessage("Sorry, I encountered an error. Please try again.", 'model'); 
+}
             } catch (error) {
                 addMessage("I'm having trouble connecting. Please check back later.", 'model');
                 console.error("Chatbot error:", error);
