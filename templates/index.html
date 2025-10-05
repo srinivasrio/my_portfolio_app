@@ -606,7 +606,7 @@ Report a Bug
 
     <div id="chat-widget" class="glass-ui">
         <div class="p-4 border-b border-[var(--glass-border-dark)]">
-            <h3 class="font-bold text-lg gradient-text">AI Assistant</h3>
+            <h3 class="font-bold text-lg gradient-text">Hi I am Nivas</h3>
             <p class="text-sm opacity-70">Ask me anything about Srinivas!</p>
         </div>
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col"></div>
@@ -1018,8 +1018,13 @@ Report a Bug
             }
         });
 
-        const portfolioContext = `Name: Srinivas Kumar. Education: 2nd year MCA student at Narayana Engineering College, Nellore. Skills: Python, SQL, NumPy, Pandas, Matplotlib, Data Analysis, Database Management, Scikit-learn, Machine Learning, Power BI, Jupyter, Google Colab, Excel, Google Analytics, Google Data Studio. Training: Data Science Master Program at Besant Technologies. Projects: 1. Population Predictor (live demo). 2. Sales Data Analysis Dashboard. 3. Student Management System. 4. Weather Data Scraper & Analyzer. Personality: Passionate about technology, problem-solving, and eager to learn.`;
-        const systemPrompt = `You are a friendly and professional AI assistant for Srinivas Kumar's portfolio. Your goal is to answer questions from visitors. Use ONLY the information provided in the following context. If a question is outside this context, politely state that you only have information about Srinivas's professional portfolio. CONTEXT: ${portfolioContext}`;
+        const portfolioContext = `Name: Srinivas Kumar. Education: 2nd year MCA student at Narayana Engineering College, Nellore. Skills: Python, SQL, NumPy, Pandas, Matplotlib, Data Analysis, Database Management, Scikit-learn, Machine Learning, Power BI, Jupyter, Google Colab, Excel, Google Analytics, Google Data Studio. Training: Data Science Master Program at Besant Technologies. Projects: 1. Population Predictor (live demo). 2. Sales Data Analysis Dashboard. 3. Student Management System. 4. Weather Data Scraper & Analyzer. Personality: Passionate about technology, problem-solving, and eager to learn. From: Nellore. Freelancing services: 1. Websites. 2. Data Analysis.
+                                  3. Machine Learning Models. 4. AI Chatbots. 5. Data Maintenance. 6. Mobile Apps (Android). Request a quote: Click freelancing button & fill the form Report a bug: Go through bottom of the webpage. Contact: Click contact button & fill general contact form. Certifications: 1. Python. 2. Java. 3. MySQL.
+
+
+
+`;
+        const systemPrompt = `Your name is Nivas. You are a friendly and professional AI assistant for Srinivas Kumar's portfolio. Your goal is to answer questions from visitors. Use ONLY the information provided in the following context. If a question is outside this context, politely state that you only have information about Srinivas's professional portfolio. CONTEXT: ${portfolioContext}`;
         
         chatIcon.addEventListener('click', (e) => {
             e.stopPropagation();
