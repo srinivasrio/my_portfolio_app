@@ -85,7 +85,8 @@ def population_india():
 def chat_proxy():
     try:
         user_payload = request.get_json()
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={GEMINI_API_KEY}"
+        model_name = os.getenv("GEMINI_MODEL", "gemini-3.0-flash")
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={GEMINI_API_KEY}"
         response = requests.post(api_url, json=user_payload)
         response.raise_for_status()
         return jsonify(response.json())
@@ -106,7 +107,8 @@ def analyze_population():
         prompt = f"Analyze India's socio-economic implications if population reaches {population} in {year}."
 
         payload = { "contents": [{ "parts": [{"text": prompt}] }] }
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={GEMINI_API_KEY}"
+        model_name = os.getenv("GEMINI_MODEL", "gemini-3.0-flash")
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={GEMINI_API_KEY}"
         response = requests.post(api_url, json=payload)
         response.raise_for_status()
         return jsonify(response.json())
